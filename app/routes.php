@@ -13,5 +13,23 @@
 
 Route::get('/', function()
 {
-	return View::make('hello');
+    // Has Auth Filter
+});
+
+Route::get('login', array('uses' => 'UserController@showLogin'));
+
+// route to process the form
+Route::post('login', array('uses' => 'UserController@doLogin'));
+
+
+Route::group(array('before' => 'auth'), function()
+{
+    Route::get('dashboard', function()
+    {
+        // Has Auth Filter
+        echo "sudah masuk dashboard";
+
+    });
+
+    Route::get('logout', 'UserController@doLogout');
 });
