@@ -15,10 +15,10 @@ class Users extends Migration {
 		Schema::create('users', function(Blueprint $table)
 		{
 			$table->increments('id');
-			$table->string('name', 32);
-          	$table->string('username', 32);
-          	$table->string('email', 320);
-          	$table->string('password', 64);
+			$table->string('email')->unique();
+            $table->string('photo');
+            $table->string('name');
+            $table->string('password');
 
             // required for Laravel 4.1.26
             $table->string('remember_token', 100)->nullable();
