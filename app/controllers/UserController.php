@@ -105,27 +105,22 @@ class UserController extends \BaseController {
 		        ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
 
-		    // create our user data for the authentication
 		    $userdata = array(
 		        'email'     => Input::get('email'),
-		        'password'  => Input::get('password')
+		        'password'  => Input::get('password'),
 		    );
 
-		    // attempt to do the login
 		    if (Auth::attempt($userdata)) {
 
-		        // validation successful!
-		        // redirect them to the secure section or whatever
-		        // return Redirect::to('secure');
-		        // for now we'll just echo success (even though echoing in a controller is bad)
 
+		    	$user = User::find(1);
+
+				$user->password = Hash::make('tekanenter');
+
+				$user->save();
 		        return Redirect::to('dashboard');
-
 		    } else {        
 		    	echo '<pre>'.print_r($userdata,1).'</pre>';
-		        // validation not successful, send back to form 
-		        // return Redirect::to('login');
-
 		    }
 
 		}
@@ -135,6 +130,6 @@ class UserController extends \BaseController {
 	{
 		Auth::logout();
 		# Arahkan ke route 'index' dengan session 'pesan'.
-		return Redirect::route('/');
+		return Redirect::to('login');
 	}
 }

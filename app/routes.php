@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-    // Has Auth Filter
+    
 });
 
 Route::get('login', array('uses' => 'UserController@showLogin'));
@@ -27,7 +27,8 @@ Route::group(array('before' => 'auth'), function()
     Route::get('dashboard', function()
     {
         // Has Auth Filter
-        echo "sudah masuk dashboard";
+                    
+        echo "sudah masuk dashboard keluar" . HTML::link('logout', 'Logout', array('id' => 'linkid', 'class' => 'pull-right need-help'));
 
     });
 
