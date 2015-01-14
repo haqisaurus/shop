@@ -126,6 +126,11 @@ class UserController extends \BaseController {
 		}
 	}
 
+	public function showAdminLogin()
+	{
+		return View::make('admin.pages.blank');
+	}
+
 	public function doLogout()
 	{
 		Auth::logout();

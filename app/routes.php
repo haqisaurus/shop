@@ -18,8 +18,9 @@ Route::get('/', function()
 
 Route::get('login', array('uses' => 'UserController@showLogin'));
 
-// route to process the form
 Route::post('login', array('uses' => 'UserController@doLogin'));
+
+Route::get('_admin', array('uses' => 'UserController@showAdminLogin'));
 
 
 Route::group(array('before' => 'auth'), function()
