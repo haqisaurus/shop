@@ -22,6 +22,8 @@ Route::post('login', array('uses' => 'UserController@doLogin'));
 
 Route::get('_admin', array('uses' => 'UserController@showAdminLogin'));
 
+Route::get('dashboard', array('uses' => 'DashboardController@index'));
+
 
 Route::group(array('before' => 'auth'), function()
 {

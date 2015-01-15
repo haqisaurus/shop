@@ -84,7 +84,17 @@ class UserController extends \BaseController {
 
 	public function showLogin()
 	{
-		return View::make('frontend.pages.login');
+		// user has role as member
+		$user = Role::find(2)->users;
+		foreach ($user as $key => $value) {
+			print_r($value->email);
+			echo "<br>";
+		}
+		
+		$role = User::find(1)->role;
+		print_r($role->level);
+		
+		// return View::make('frontend.pages.login');
 	}
 
 	public function doLogin()
@@ -104,6 +114,8 @@ class UserController extends \BaseController {
 		        ->withErrors($validator) // send back all errors to the login form
 		        ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
 		} else {
+
+			// check is not admin
 
 		    $userdata = array(
 		        'email'     => Input::get('email'),
@@ -128,7 +140,7 @@ class UserController extends \BaseController {
 
 	public function showAdminLogin()
 	{
-		return View::make('admin.pages.blank');
+		return View::make('admin.layouts.login');
 	}
 
 	public function doLogout()

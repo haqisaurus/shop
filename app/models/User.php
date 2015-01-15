@@ -16,6 +16,12 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	 */
 	protected $table = 'users';
 
+	// table realtion 
+	public function role()
+    {
+        return $this->belongsTo('Role', 'user_role_id');
+    }
+
 	/**
 	 * The attributes excluded from the model's JSON form.
 	 *
@@ -34,4 +40,6 @@ class User extends Eloquent implements UserInterface, RemindableInterface {
 	public function getRememberTokenName() {
 		return 'remember_token';
 	}
+
+
 }
