@@ -2,39 +2,41 @@
 <div class="collapse navbar-collapse navbar-ex1-collapse">
     <ul class="nav navbar-nav side-nav">
         <li>
-            <a href="index.html"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
+            <a href="{{ url('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
-            <a href="charts.html"><i class="fa fa-fw fa-bar-chart-o"></i> Charts</a>
-        </li>
-        <li>
-            <a href="tables.html"><i class="fa fa-fw fa-table"></i> Tables</a>
-        </li>
-        <li>
-            <a href="forms.html"><i class="fa fa-fw fa-edit"></i> Forms</a>
-        </li>
-        <li>
-            <a href="bootstrap-elements.html"><i class="fa fa-fw fa-desktop"></i> Bootstrap Elements</a>
-        </li>
-        <li>
-            <a href="bootstrap-grid.html"><i class="fa fa-fw fa-wrench"></i> Bootstrap Grid</a>
-        </li>
-        <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#demo"><i class="fa fa-fw fa-arrows-v"></i> Dropdown <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="demo" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#menu-product"><i class="fa fa-fw fa-cubes"></i> Product <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="menu-product" class="collapse">
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="{{ url('category') }}">Category</a>
                 </li>
                 <li>
-                    <a href="#">Dropdown Item</a>
+                    <a href="{{ url('products') }}">Products</a>
+                </li>
+                <li>
+                    <a href="{{ url('suppliers') }}">supplier</a>
                 </li>
             </ul>
         </li>
-        <li class="active">
-            <a href="blank-page.html"><i class="fa fa-fw fa-file"></i> Blank Page</a>
+        <li>
+            <a href="javascript:;" data-toggle="collapse" data-target="#menu-order"><i class="fa fa-fw fa-bar-chart-o"></i> Order <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="menu-order" class="collapse">
+                <li>
+                    <a href="{{ url('orders') }}">Order</a>
+                </li>
+                <li>
+                    <a href="{{ url('returns') }}">Return</a>
+                </li>
+            </ul>
         </li>
         <li>
-            <a href="index-rtl.html"><i class="fa fa-fw fa-dashboard"></i> RTL Dashboard</a>
+            <a href="c{{ url('mails') }}"><i class="fa fa-inbox"></i> Mails</a>
+        </li>
+        <li>
+            <a href="{{ url('users') }}"><i class="fa fa-users"></i> Users</a>
+        </li>
+        <li>
+            <a href="{{ url('settings') }}"><i class="fa fa-cogs"></i> Settings</a>
         </li>
     </ul>
 </div>

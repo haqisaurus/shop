@@ -22,9 +22,6 @@ Route::post('login', array('uses' => 'UserController@doLogin'));
 
 Route::get('_admin', array('uses' => 'UserController@showAdminLogin'));
 
-Route::get('dashboard', array('uses' => 'DashboardController@index'));
-
-
 Route::group(array('before' => 'auth'), function()
 {
     Route::get('dashboard', function()
@@ -36,4 +33,40 @@ Route::group(array('before' => 'auth'), function()
     });
 
     Route::get('logout', 'UserController@doLogout');
+});
+
+Route::get('dashboard', function() {
+	return View::make('admin.pages.dashboard');
+});
+
+Route::get('category', function () {
+	return View::make('admin.pages.list-category');
+});
+
+Route::get('product', function () {
+	return View::make('admin.pages.list-product');
+});
+
+Route::get('supplier', function () {
+	return View::make('admin.pages.list-supplier');
+});
+
+Route::get('order', function () {
+	return View::make('admin.pages.list-order');
+});
+
+Route::get('return', function () {
+	return View::make('admin.pages.list-return');
+});
+
+Route::get('mail', function () {
+	return View::make('admin.pages.list-mail');
+});
+
+Route::get('user', function () {
+	return View::make('admin.pages.list-user');
+});
+
+Route::get('setting', function () {
+	return View::make('admin.pages.form-setting');
 });

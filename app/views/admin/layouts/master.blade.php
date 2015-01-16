@@ -62,6 +62,11 @@
     <!-- Bootstrap Core JavaScript -->
     {{HTML::script('assets/admin/js/bootstrap.min.js')}}
 
+    <!-- Morris Charts JavaScript -->
+    {{HTML::script('assets/admin/js/plugins/morris/raphael.min.js')}}
+    {{HTML::script('assets/admin/js/plugins/morris/morris.min.js')}}
+    {{HTML::script('assets/admin/js/plugins/morris/morris-data.js')}} 
+
 </body>
 
 </html>
