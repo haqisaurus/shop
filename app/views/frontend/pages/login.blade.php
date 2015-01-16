@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <div class="row">
+        
         <div class="col-sm-6 col-md-4 col-md-offset-4">
             <h1 class="text-center login-title">Sign in to continue to Bootsnipp</h1>
             <div class="account-wall">
@@ -10,9 +11,11 @@
                 
                 {{ Form::open(array('action' => 'UserController@doLogin', 'class' => 'form-signin')) }}
 
-                    {{ Form::text('email', '',array('class' => 'form-control', 'placeholder' => 'Email', 'autofocus' => 'autofocus', 'required' => 'required' )) }}
+                    {{ Form::text('email', Input::old('email') ,array('class' => 'form-control', 'placeholder' => 'Email', 'autofocus' => 'autofocus', 'required' => 'required' )) }}
 
                     {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password', 'required' => 'required' )) }}
+
+                    <span class="help-block text-center">{{ Session::get('msg')}}</span>
 
                     {{  Form::submit('Sign in', array('class' => 'btn btn-lg btn-primary btn-block', )) }}
 

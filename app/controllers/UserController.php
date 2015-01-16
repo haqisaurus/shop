@@ -85,16 +85,16 @@ class UserController extends \BaseController {
 	public function showLogin()
 	{
 		// user has role as member
-		$user = Role::find(2)->users;
-		foreach ($user as $key => $value) {
-			print_r($value->email);
-			echo "<br>";
-		}
+		// $user = Role::find(2)->users;
+		// foreach ($user as $key => $value) {
+		// 	print_r($value->email);
+		// 	echo "<br>";
+		// }
 		
-		$role = User::find(1)->role;
-		print_r($role->level);
+		// $role = User::find(1)->role;
+		// print_r($role->level);
 		
-		// return View::make('frontend.pages.login');
+		return View::make('frontend.pages.login');
 	}
 
 	public function doLogin()
@@ -118,6 +118,7 @@ class UserController extends \BaseController {
 			// check is not admin
 
 		    $userdata = array(
+		    	'user_role_id' => 2,
 		        'email'     => Input::get('email'),
 		        'password'  => Input::get('password'),
 		    );
@@ -132,7 +133,9 @@ class UserController extends \BaseController {
 				$user->save();
 		        return Redirect::to('dashboard');
 		    } else {        
-		    	echo '<pre>'.print_r($userdata,1).'</pre>';
+		    	return Redirect::to('login')
+		    			->with('msg', 'User not found...')
+            			->withInput(Input::except('password')); 	
 		    }
 
 		}
