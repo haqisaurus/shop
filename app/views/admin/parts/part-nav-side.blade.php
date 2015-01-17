@@ -5,10 +5,10 @@
             <a href="{{ url('dashboard') }}"><i class="fa fa-fw fa-dashboard"></i> Dashboard</a>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#menu-product"><i class="fa fa-fw fa-cubes"></i> Product <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="menu-product" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#menu-catalog"><i class="fa fa-fw fa-cubes"></i> Catalog <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="menu-catalog" class="collapse">
                 <li>
-                    <a href="{{ url('category') }}">Category</a>
+                    <a href="{{ url('categories') }}">Category</a>
                 </li>
                 <li>
                     <a href="{{ url('products') }}">Products</a>
@@ -19,8 +19,8 @@
             </ul>
         </li>
         <li>
-            <a href="javascript:;" data-toggle="collapse" data-target="#menu-order"><i class="fa fa-fw fa-bar-chart-o"></i> Order <i class="fa fa-fw fa-caret-down"></i></a>
-            <ul id="menu-order" class="collapse">
+            <a href="javascript:;" data-toggle="collapse" data-target="#menu-sales"><i class="fa fa-fw fa-bar-chart-o"></i> Sales <i class="fa fa-fw fa-caret-down"></i></a>
+            <ul id="menu-sales" class="collapse">
                 <li>
                     <a href="{{ url('orders') }}">Order</a>
                 </li>
@@ -30,7 +30,7 @@
             </ul>
         </li>
         <li>
-            <a href="c{{ url('mails') }}"><i class="fa fa-inbox"></i> Mails</a>
+            <a href="{{ url('messages') }}"><i class="fa fa-inbox"></i> Message</a>
         </li>
         <li>
             <a href="{{ url('users') }}"><i class="fa fa-users"></i> Users</a>

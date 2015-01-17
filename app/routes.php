@@ -39,34 +39,55 @@ Route::get('dashboard', function() {
 	return View::make('admin.pages.dashboard');
 });
 
-Route::get('category', function () {
-	return View::make('admin.pages.list-category');
-});
+Route::get('categories', array('uses' => 'ProductController@listCategory', ));
 
-Route::get('product', function () {
+	Route::get('add-category', array('uses' => 'ProductController@addCategory', ));
+
+	Route::post('add-category', array('uses' => 'ProductController@addCategoryProgress', ));
+
+Route::get('products', function () {
 	return View::make('admin.pages.list-product');
 });
 
-Route::get('supplier', function () {
-	return View::make('admin.pages.list-supplier');
+	Route::get('add-product', function () {
+		return View::make('admin.pages.form-product');
 });
 
-Route::get('order', function () {
+Route::get('suppliers', function () {
+	return View::make('admin.pages.list-supplier');
+});
+	
+	Route::get('add-supplier', function () {
+		return View::make('admin.pages.form-supplier');
+	});
+
+Route::get('orders', function () {
 	return View::make('admin.pages.list-order');
 });
 
-Route::get('return', function () {
+	Route::get('edit-order', function () {
+		return View::make('admin.pages.form-order');
+	});
+
+	Route::get('detail-order', function () {
+		return View::make('admin.pages.detail-order');
+	});
+
+Route::get('returns', function () {
 	return View::make('admin.pages.list-return');
 });
 
-Route::get('mail', function () {
-	return View::make('admin.pages.list-mail');
+Route::get('messages', function () {
+	return View::make('admin.pages.list-message');
 });
 
-Route::get('user', function () {
+Route::get('users', function () {
 	return View::make('admin.pages.list-user');
 });
+	Route::get('edit-user', function () {
+		return View::make('admin.pages.form-user');
+	});
 
-Route::get('setting', function () {
+Route::get('settings', function () {
 	return View::make('admin.pages.form-setting');
 });
