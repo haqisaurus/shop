@@ -16,7 +16,7 @@ class Categories extends Migration {
 		{
 			$table->increments('id');
             $table->string('name');
-			$table->longText('description');
+			$table->longText('description')->nullable();
 			$table->integer('level');
 			$table->integer('parent_id')->unsigned()->nullable();
 			$table->timestamps();

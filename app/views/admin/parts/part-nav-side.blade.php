@@ -8,7 +8,7 @@
             <a href="javascript:;" data-toggle="collapse" data-target="#menu-catalog"><i class="fa fa-fw fa-cubes"></i> Catalog <i class="fa fa-fw fa-caret-down"></i></a>
             <ul id="menu-catalog" class="collapse">
                 <li>
-                    <a href="{{ url('categories') }}">Category</a>
+                    <a href="{{ URL::to('categories') }}">Category</a>
                 </li>
                 <li>
                     <a href="{{ url('products') }}">Products</a>

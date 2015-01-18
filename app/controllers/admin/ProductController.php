@@ -81,47 +81,4 @@ class ProductController extends \BaseController {
 	{
 		//
 	}
-
-	public function listCategory()
-	{
-		return View::make('admin.pages.list-category');
-	}
-
-	public function addCategory()
-	{
-		return View::make('admin.pages.form-category');
-	}
-
-	public function addCategoryProgress()
-	{
-		$rules = array(
-		    'name'    => 'required', 
-		    'desctiption' => 'alpha_dash',
-		    'parent' => 'required',
-		);
-
-		$validator = Validator::make(Input::all(), $rules);
-
-		if ($validator->fails()) {
-		    return Redirect::to('add-category')
-		        ->withErrors($validator) 
-		        ->withInput(); 
-		} else {
-			$parent = Category::find(Input::get('parent'));
-
-			$category = new Category;
-			$category->name = Input::get('name');
-			$category->description = Input::get('desctiption') ? Input::get('desctiption') : '';
-			$category->parent_id = Input::get('parent');
-
-			$result = $category->save();
-
-			if ($result) {
-				return Redirect::to('add-category')->with('result', array('status' => 'alert-success', 'message' => 'input success' ));
-			} else {
-				return Redirect::to('add-category')>withInput()->with('result', array('status' => 'alert-danger', 'message' => 'input success' ));; 
-			}
-			
-		}
-	}
 }

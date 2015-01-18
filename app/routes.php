@@ -39,11 +39,7 @@ Route::get('dashboard', function() {
 	return View::make('admin.pages.dashboard');
 });
 
-Route::get('categories', array('uses' => 'ProductController@listCategory', ));
-
-	Route::get('add-category', array('uses' => 'ProductController@addCategory', ));
-
-	Route::post('add-category', array('uses' => 'ProductController@addCategoryProgress', ));
+Route::resource('categories', 'CategoryController');
 
 Route::get('products', function () {
 	return View::make('admin.pages.list-product');

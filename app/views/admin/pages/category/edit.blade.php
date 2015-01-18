@@ -27,6 +27,13 @@
 
     @section('content')
     <div class="col-lg-12">
+        
+        <div class="row">
+            <div class="col-md-12">
+                <a href="{{ url('categories') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+            </div>
+        </div>
+        <br>
         @if ($errors->has())
         <div class="alert alert-danger">
             @foreach ($errors->all() as $error)
@@ -34,49 +41,45 @@
             @endforeach
         </div>
         @endif
-        {{ Session::get('result')}}
-        
-        
+
+        @if (Session::has('result'))
+        <div class="alert {{ Session::get('result')['status'] }}">
+            {{ Session::get('result')['message'] }}
+        </div>
+        @endif
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Add category</h3>
             </div>
             <div class="panel-body">
-                <form class="form-horizontal" action="{{ url('add-category') }}" method="POST">
+                {{ Form::model($editData['category'], array('route' => array('categories.update', $editData['category']->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
                     <div class="form-group @if ($errors->has('name')) has-error @endif">
                         <label for="name" class="col-sm-2 control-label">Category name</label>
                         <div class="col-sm-10">
-                            <input type="hidden" class="form-control" id="id"  name="id" value="{{ Input::old('id') }}">
-                            <input type="text" class="form-control" id="name" name="name" placeholder="Name" value="{{ Input::old('name') }}">
+                            {{ Form::text('name', null, array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name')) }}
                         </div>
                     </div>
 
                     <div class="form-group @if ($errors->has('desctiption')) has-error @endif">
                         <label for="description" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
-                            <textarea class="form-control" id="description" name="description" placeholder="Description">{{ Input::old('description') }}</textarea>
+                            {{ Form::text('description', null, array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
                         </div>
                     </div>
 
                     <div class="form-group @if ($errors->has('parent')) has-error @endif">
-                        <label for="parent" class="col-sm-2 control-label">Parent category</label>
+                        <label for="parent_id" class="col-sm-2 control-label">Parent category</label>
                         <div class="col-sm-10">
-                            <select id="parent" name="parent" class="form-control" value="{{ Input::old('parent') }}">
-                                <option>1</option>
-                                <option>2</option>
-                                <option>3</option>
-                                <option>4</option>
-                                <option>5</option>
-                            </select>
+                            {{ Form::select('parent_id', $editData['options'], null, array('id' => 'parent_id', 'class' => 'form-control')) }}
                         </div>
                     </div>
 
                     <div class="form-group">
                         <div class="col-sm-offset-2 col-sm-10">
-                            <button type="submit" class="btn btn-default">Submit</button>
+                             {{ Form::submit('Submit', array('class' => 'btn btn-primary')) }}
                         </div>
                     </div>
-                </form>
+                {{ Form::close() }}
             </div>
         </div>
     </div>
