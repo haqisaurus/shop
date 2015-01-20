@@ -1,5 +1,6 @@
 <?php
 
+
 class DatabaseSeeder extends Seeder {
 
 	/**
@@ -13,6 +14,8 @@ class DatabaseSeeder extends Seeder {
 
 		$this->call('UserroleTableSeeder');
 		$this->call('UserTableSeeder');
+		$this->call('ConfigurationTableSeeder');
+
 	}
 
 }
@@ -53,13 +56,34 @@ class UserroleTableSeeder extends Seeder {
     public function run()
     {
         DB::table('user_role')->delete();
-	    Role::create(array(
-	        'level'     => 'Admin',
-	    ));
-
-	    Role::create(array(
-	        'level'     => 'Member',
-	    ));
+	    Role::create(
+	    	array(
+		        'level'     => 'Admin',
+		    )
+		);
+	    Role::create(
+		    array(
+		        'level'     => 'Member',
+		    )
+	    );
     }
 
+}
+
+class ConfigurationTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('configuration')->delete();
+        
+	    Setting::create(array(
+	        'name'     => 'Nova',
+	        'owner'    => 'Admin',
+	        'address'  => 'jakal km 10',
+	        'email'     => 'nova@gmail.com',
+	        'telephone' => '09878764367',
+	        'logo'     => 'Admin',
+	        )
+	    );
+    }
 }

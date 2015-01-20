@@ -4,7 +4,6 @@
 <div class="row">
 
     @section('header')
-
     <div class="col-lg-12">
         <h1 class="page-header">
             Categories
@@ -19,7 +18,6 @@
             </li>
         </ol>
     </div>
-
     @stop
 
     @section('content')

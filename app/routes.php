@@ -42,11 +42,11 @@ Route::get('dashboard', function() {
 Route::resource('categories', 'CategoryController');
 
 Route::get('products', function () {
-	return View::make('admin.pages.list-product');
+	return View::make('admin.pages.product.index');
 });
 
 	Route::get('add-product', function () {
-		return View::make('admin.pages.form-product');
+		return View::make('admin.pages.product.create');
 });
 
 Route::get('suppliers', function () {
@@ -85,5 +85,18 @@ Route::get('users', function () {
 	});
 
 Route::get('settings', function () {
-	return View::make('admin.pages.form-setting');
+
+		$setting = Setting::all();
+		foreach ($setting as $key => $value) {
+			print_r($value->name);
+		}
+
+        // $setting->name = "Nova";
+        // $setting->owner = "admin";
+        // $setting->address = "jakal";
+        // $setting->email = "haqisalla@gmail.com";
+        // $setting->telephone = "099878789";
+        // $setting->logo = "admin";
+        // $setting->save();
+	// return View::make('admin.pages.setting.edit');
 });
