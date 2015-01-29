@@ -11,7 +11,7 @@
                     <a href="{{ URL::to('category') }}">Category</a>
                 </li>
                 <li>
-                    <a href="{{ url('products') }}">Products</a>
+                    <a href="{{ url('product') }}">Product</a>
                 </li>
                 <li>
                     <a href="{{ url('supplier') }}">supplier</a>

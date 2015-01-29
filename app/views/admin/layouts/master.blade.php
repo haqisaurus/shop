@@ -68,8 +68,13 @@
     <!-- Bootstrap Core JavaScript -->
     {{HTML::script('assets/admin/js/bootstrap.min.js')}}
 
-    <!-- Morris Charts JavaScript -->
+    <!-- File upload -->
+    {{HTML::script('assets/admin/js/plugins/jquery.ui.widget.js')}}
+    {{HTML::script('assets/admin/js/plugins/jquery.iframe-transport.js')}}
+    {{HTML::script('assets/admin/js/plugins/jquery.fileupload.js')}}
+
     {{HTML::script('assets/admin/js/engine.js')}}
+    
 
 </body>
 

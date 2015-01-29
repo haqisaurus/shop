@@ -30,13 +30,8 @@ class SupplierController extends \BaseController {
 	{
 
 		$categories = Supplier::all();
-		$options = array('0' => 'root'); 
 
-		foreach ($categories as $key => $value) {
-			$options[$value->id] = $value->name;
-		}
-
-		return View::make('admin.pages.supplier.create', compact('options'));
+		return View::make('admin.pages.supplier.create');
 	}
 
 

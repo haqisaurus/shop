@@ -48,13 +48,10 @@ Route::get('supplier/search', array('as' => 'supplier.search', 'uses' => 'Suppli
 Route::resource('supplier', 'SupplierController');
 
 
-Route::get('products', function () {
-	return View::make('admin.pages.product.index');
-});
-
-	Route::get('add-product', function () {
-		return View::make('admin.pages.product.create');
-});
+Route::post('product/delAll', array('as' => 'product.deleteAll', 'uses' => 'ProductController@destroyAll'));
+Route::get('product/search', array('as' => 'product.search', 'uses' => 'ProductController@search'));
+Route::post('product/upload', array('as' => 'product.upload', 'uses' => 'ProductController@upload'));
+Route::resource('product', 'ProductController');
 
 Route::get('suppliers', function () {
 	return View::make('admin.pages.list-supplier');
