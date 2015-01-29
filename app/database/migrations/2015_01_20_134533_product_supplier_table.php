@@ -17,6 +17,7 @@ class ProductSupplierTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->longText('description');
+			$table->longText('address');
 			$table->string('path', 200);
 
 			$table->timestamps();

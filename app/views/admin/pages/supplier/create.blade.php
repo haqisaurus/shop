@@ -15,7 +15,7 @@
                 <i class="fa fa-dashboard"></i>  <a href="{{ URL::to('dashboard') }}"> Dashboard</a>
             </li>
             <li>
-                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('categories') }}"> Suppliers</a>
+                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('supplier') }}"> Suppliers</a>
             </li>
             <li class="active">
                 <i class="fa fa-edit"></i> Form add supplier
@@ -30,7 +30,7 @@
         
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ url('categories') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                <a href="{{ url('supplier') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
             </div>
         </div>
         <br>
@@ -48,18 +48,25 @@
                 <h3 class="panel-title">Add supplier</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('url' => 'supplier', 'class' => 'form-horizontal')) }}
+                {{ Form::open(array('url' => 'supplier', 'class' => 'form-horizontal', 'files'=>true)) }}
                     <div class="form-group @if ($errors->has('name')) has-error @endif">
-                        <label for="name" class="col-sm-2 control-label">Category name</label>
-                        <div class="col-sm-10">
+                        <label for="name" class="col-sm-2 control-label">Supplier name</label>
+                        <div class="col-sm-5">
                             {{ Form::text('name', Input::old('name'), array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name')) }}
                         </div>
                     </div>
 
-                    <div class="form-group @if ($errors->has('desctiption')) has-error @endif">
+                    <div class="form-group @if ($errors->has('description')) has-error @endif">
                         <label for="description" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
-                            {{ Form::text('description', Input::old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
+                            {{ Form::textarea('description', Input::old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group @if ($errors->has('address')) has-error @endif">
+                        <label for="address" class="col-sm-2 control-label">Address</label>
+                        <div class="col-sm-10">
+                            {{ Form::textarea('address', Input::old('address'), array('id' => 'address', 'class' => 'form-control', 'placeholder' => 'Address')) }}
                         </div>
                     </div>
                     
@@ -68,14 +75,7 @@
                         <div class="col-sm-4">
                             <img src="http://placehold.it/100x100" class="img-responsive img-rounded" alt="Responsive image">
                             <br>
-                            {{ Form::file('logo', Input::old('logo'), array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Logo')) }}
-                        </div>
-                    </div>
-
-                    <div class="form-group @if ($errors->has('parent_id')) has-error @endif">
-                        <label for="parent_id" class="col-sm-2 control-label">Parent category</label>
-                        <div class="col-sm-10">
-                            {{ Form::select('parent_id', $options, Input::old('parent_id'), array('id' => 'parent_id', 'class' => 'form-control')) }}
+                            {{ Form::file('logo', Input::old('logo'), array('id' => 'logo', 'class' => 'form-control', 'placeholder' => 'Logo')) }}
                         </div>
                     </div>
 

@@ -7,18 +7,18 @@
 
     <div class="col-lg-12">
         <h1 class="page-header">
-            Category
-            <small>Edit category</small>
+            Supplier
+            <small>Edit supplier</small>
         </h1>
         <ol class="breadcrumb">
             <li>
                 <i class="fa fa-dashboard"></i>  <a href="{{ URL::to('dashboard') }}">Dashboard</a>
             </li>
             <li>
-                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('category') }}"> Categories</a>
+                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('supplier') }}"> Suppliers</a>
             </li>
             <li class="active">
-                <i class="fa fa-edit"></i> Form edit category
+                <i class="fa fa-edit"></i> Form edit supplier
             </li>
         </ol>
     </div>
@@ -30,7 +30,7 @@
         
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ url('category') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                <a href="{{ url('supplier') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
             </div>
         </div>
         <br>
@@ -45,12 +45,12 @@
 
         <div class="panel panel-default">
             <div class="panel-heading">
-                <h3 class="panel-title">Edit category</h3>
+                <h3 class="panel-title">Edit supplier</h3>
             </div>
             <div class="panel-body">
-                {{ Form::model($editData['category'], array('route' => array('category.update', $editData['category']->id), 'method' => 'PUT', 'class' => 'form-horizontal')) }}
+                {{ Form::model($editData['supplier'], array('route' => array('supplier.update', $editData['supplier']->id), 'method' => 'PUT', 'files'=>true, 'class' => 'form-horizontal')) }}
                     <div class="form-group @if ($errors->has('name')) has-error @endif">
-                        <label for="name" class="col-sm-2 control-label">Category name</label>
+                        <label for="name" class="col-sm-2 control-label">Supplier name</label>
                         <div class="col-sm-10">
                             {{ Form::text('name', null, array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name')) }}
                         </div>
@@ -59,14 +59,23 @@
                     <div class="form-group @if ($errors->has('desctiption')) has-error @endif">
                         <label for="description" class="col-sm-2 control-label">Description</label>
                         <div class="col-sm-10">
-                            {{ Form::text('description', null, array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
+                            {{ Form::textarea('description', null, array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
                         </div>
                     </div>
 
                     <div class="form-group @if ($errors->has('parent')) has-error @endif">
-                        <label for="parent_id" class="col-sm-2 control-label">Parent category</label>
+                        <label for="address" class="col-sm-2 control-label">Adress</label>
                         <div class="col-sm-10">
-                            {{ Form::select('parent_id', $editData['options'], null, array('id' => 'parent_id', 'class' => 'form-control')) }}
+                            {{ Form::textarea('address', null, array('id' => 'address', 'class' => 'form-control', 'placeholder' => 'Address')) }}
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="inputPassword3" class="col-sm-2 control-label">Logo</label>
+                        <div class="col-sm-4">
+                            {{ HTML::image($editData['supplier']->path, "Logo", array('class' => "img-responsive img-rounded")) }}
+                            <br>
+                            {{ Form::file('logo', null, array('id' => 'logo', 'class' => 'form-control', 'placeholder' => 'Logo')) }}
                         </div>
                     </div>
 

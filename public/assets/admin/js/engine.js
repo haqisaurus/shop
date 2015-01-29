@@ -31,10 +31,12 @@ $('#delete-popup')
 $('#delete-selected-popup')
 .off('click', '#delete-selected-button')
 .on('click', '#delete-selected-button', function() {
-    var selectedId = $('#mytable').find('input[name="selected-rows[]"]:checked').map(function() { return $(this).val() }).get();
+    
+    var selectedId = $('#mytable').find('input[name="selected-rows[]"]:checked').map(function() { return $(this).val() }).get(),
+        url = $(this).attr('data-url');
 
     $.ajax({
-        url: 'categories/delAll',
+        url: url,
         type: 'POST',
         dataType: 'json',
         data: {id: selectedId},

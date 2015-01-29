@@ -31,7 +31,7 @@
 
             </div>
             <div class="modal-footer ">
-                <button type="button" id="delete-selected-button" class="btn btn-danger" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
+                <button type="button" id="delete-selected-button" class="btn btn-danger" data-url="supplier/delAll" ><span class="glyphicon glyphicon-ok-sign"></span> Yes</button>
                 <button type="button" class="btn btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> No</button>
             </div>
         </div>

@@ -11,7 +11,7 @@ class SupplierController extends \BaseController {
 	 */
 	public function index()
 	{
-		$suppliers = Supplier::orderBy('id', 'DESC')->paginate(10);
+		$suppliers = Supplier::orderBy('id', 'DESC')->paginate(2);
 		$listData['suppliers'] = $suppliers;
 		
 		$this->layout->content = View::make('admin.pages.supplier.index')->with('listData', $listData);
@@ -29,7 +29,7 @@ class SupplierController extends \BaseController {
 	public function create()
 	{
 
-		$categories = Category::all();
+		$categories = Supplier::all();
 		$options = array('0' => 'root'); 
 
 		foreach ($categories as $key => $value) {
@@ -51,44 +51,48 @@ class SupplierController extends \BaseController {
 		$rules = array(
 		    'name'    		=> 'required', 
 		    'description' 	=> 'alpha_dash',
-		    'parent_id' 	=> 'required',
+		    'address' 		=> 'required',
+		    'logo' 			=> '',
 		);
 
 		$name = Input::get('name');
 		$description = Input::get('description');
-		$parentId = Input::get('parent_id');
+		$address = Input::get('address');
+		$logo = Input::file('logo');
 
 		$validator = Validator::make(Input::all(), $rules);
 		
 		if ($validator->fails()) {
 
-		    return Redirect::to('category/create')
+		    return Redirect::to('supplier/create')
 		        ->withErrors($validator) 
 		        ->withInput(); 
-		} else {
+		} else {	
 
+			// upload file logo
+			$supplier = new Supplier;
+			$supplier->name = $name;
+			$supplier->description = $description;
+			$supplier->address = $address;
 
-			$category = new Category;
-			$category->name = $name;
-			$category->description = $description;
-			
-			if (!$parentId) {
-				
-				$category->parent_id = $parentId;
-
-				$parentLevel = Category::find($parentId);
-
-				if ($parentLevel) {
-					$category->level =  $parentLevel->level + 1;
-				}
+			if (Input::hasFile('logo'))
+			{
+				$filename = str_random(12) . '.' . $logo->getClientOriginalExtension();
+				$uploadResult = Input::file('logo')->move('uploads/supplier-logo', $filename);
+				$supplier->path = $uploadResult->getPathName();
 			}
+			else
+			{
+				$supplier->path = 'uploads/default/100x100.gif';
+			}
+			
 
-			$result = $category->save();
+			$result = $supplier->save();
 
 			if ($result) {
-				return Redirect::to('category')->with('result', array('status' => 'alert-success', 'message' => 'Input success' ));
+				return Redirect::to('supplier')->with('result', array('status' => 'alert-success', 'message' => 'Input success' ));
 			} else {
-				return Redirect::to('category/create')>withInput(); 
+				return Redirect::to('supplier/create')>withInput(); 
 			}
 			
 		}
@@ -115,19 +119,11 @@ class SupplierController extends \BaseController {
 	 */
 	public function edit($id)
 	{
-		$categories = Category::all();
-		$options = array('0' => 'root'); 
+		$categories = Supplier::all();
+		$editData['supplier'] = Supplier::find($id);
 
-		foreach ($categories as $key => $value) {
-			$options[$value->id] = $value->name;
-		}
-
-
-		$editData['category'] = Category::find($id);
-		$editData['options'] = $options;
-
-		return View::make('admin.pages.category.edit')
-			->with('editData', $editData);
+		return View::make('admin.pages.supplier.edit')
+					->with('editData', $editData);
 	}
 
 
@@ -143,42 +139,42 @@ class SupplierController extends \BaseController {
 		$rules = array(
 		    'name'    		=> 'required', 
 		    'description' 	=> 'alpha_dash',
-		    'parent_id'		=> 'required',
+		    'address' 		=> 'required',
+		    'logo' 			=> '',
 		);
 
 		$name = Input::get('name');
 		$description = Input::get('description');
-		$parentId = Input::get('parent_id');
+		$address = Input::get('address');
+		$logo = Input::file('logo');
 		
 		$validator = Validator::make(Input::all(), $rules);
 		
 		if ($validator->fails()) {
 
-		    return Redirect::to('category/' . $id . '/edit')
+		    return Redirect::to('supplier/' . $id . '/edit')
 		        ->withErrors($validator) 
 		        ->withInput(); 
 		} else {
 
-			$category = Category::find($id);
-			$category->name = $name;
-			$category->description = $description;
-			
-			
-			$parentLevel = Category::find($parentId);
-			
-			$category->parent_id = $parentId;
+			$supplier = Supplier::find($id);
+			$supplier->name = $name;
+			$supplier->description = $description;
+			$supplier->address = $address;
 
-			if ($parentLevel) {
-				$category->level =  $parentLevel->level + 1;
+			if (Input::hasFile('logo'))
+			{
+				$filename = str_random(12) . '.' . $logo->getClientOriginalExtension();
+				$uploadResult = Input::file('logo')->move('uploads/supplier-logo', $filename);
+				$supplier->path = $uploadResult->getPathName();
 			}
 
-
-			$result = $category->save();
+			$result = $supplier->save();
 
 			if ($result) {
-				return Redirect::to('category')->with('result', array('status' => 'alert-success', 'message' => 'Update success' ));
+				return Redirect::to('supplier')->with('result', array('status' => 'alert-success', 'message' => 'Update success' ));
 			} else {
-				return Redirect::to('category/' . $id . '/edit')>withInput(); 
+				return Redirect::to('supplier/' . $id . '/edit')>withInput(); 
 			}
 		}
 	}
@@ -193,15 +189,15 @@ class SupplierController extends \BaseController {
 	public function destroy($id)
 	{
 
-		$category = Category::find($id);
-        $result = $category->delete();
+		$supplier = Supplier::find($id);
+        $result = $supplier->delete();
 
         // redirect
         if ($result) {
-        	return Redirect::to('category')
+        	return Redirect::to('supplier')
         		->with('result', array('status' => 'alert-success', 'message' => 'Successfully deleted the category!' ));
 		} else {
-			return Redirect::to('category')
+			return Redirect::to('supplier')
         		->with('result', array('status' => 'alert-success', 'message' => 'Failed to delete!' ));
 		}
 	}
@@ -210,12 +206,12 @@ class SupplierController extends \BaseController {
 	public function search()
 	{
 		$q = Input::get('query');
-		$categories = Category::orderBy('id', 'DESC')->where('name', 'like', "$q%")->paginate(10);
-		$listData['categories'] = $categories;
+		$categories = Supplier::orderBy('id', 'DESC')->where('name', 'like', "$q%")->paginate(10);
+		$listData['suppliers'] = $categories;
 		$listData['query'] = $q;
 
-		$this->layout->content = View::make('admin.pages.category.index')->with('listData', $listData);
-		$this->layout->popup = View::make('admin.pages.category.popup')->render();
+		$this->layout->content = View::make('admin.pages.supplier.index')->with('listData', $listData);
+		$this->layout->popup = View::make('admin.pages.supplier.popup')->render();
 
 		return $this->layout;	
 	}
@@ -226,8 +222,8 @@ class SupplierController extends \BaseController {
 		$ids = Input::get('id');
 		
 		foreach ($ids as $key => $id) {
-			$category = Category::find($id);
-	        $result = $category->delete();
+			$supplier = Supplier::find($id);
+	        $result = $supplier->delete();
 		}
 
         if ($result) {

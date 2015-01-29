@@ -58,7 +58,7 @@
                     <th><input type="checkbox" id="checkall" /></th>
                     <th>Name</th>
                     <th>Description</th>
-                    <th>Level</th>
+                    <th>Address</th>
                     <th>Actions</th>
                 </thead>
                 <tbody>
@@ -68,7 +68,7 @@
                         <td><input type="checkbox" name="selected-rows[]" class="checkthis" value="{{ $supplier->id }}"></td>
                         <td>{{ $supplier->name }}</td>
                         <td>{{ $supplier->description }}</td>
-                        <td>{{ $supplier->level }}</td>
+                        <td>{{ $supplier->address }}</td>
                         <td>
                             {{ Form::open(array('url' => 'supplier/'. $supplier->id . '/edit', 'class' => 'inline')) }}
                             {{ Form::hidden('_method', 'GET') }}
