@@ -11,7 +11,9 @@ class BaseController extends Controller {
 	{
 		if ( ! is_null($this->layout))
 		{
-			$this->layout = View::make($this->layout);
+			$layout = Request::ajax() ? 'admin/layouts/ajax' : $this->layout;
+        	$this->layout = View::make($layout);  
+			// $this->layout = View::make($this->layout);
 		}
 	}
 

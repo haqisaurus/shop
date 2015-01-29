@@ -2,7 +2,7 @@
 
 class Category extends \Eloquent {
 	protected $fillable = [];
-	protected $table = 'categories';
+	protected $table = 'product_category';
 
     public function childs()
     {

@@ -74,7 +74,7 @@ class ConfigurationTableSeeder extends Seeder {
 
     public function run()
     {
-        DB::table('configuration')->delete();
+        DB::table('setting')->delete();
         
 	    Setting::create(array(
 	        'name'     => 'Nova',

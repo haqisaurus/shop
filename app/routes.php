@@ -13,7 +13,7 @@
 
 Route::get('/', function()
 {
-    
+	return View::make('admin.pages.dashboard');
 });
 
 Route::get('login', array('uses' => 'UserController@showLogin'));
@@ -39,7 +39,14 @@ Route::get('dashboard', function() {
 	return View::make('admin.pages.dashboard');
 });
 
-Route::resource('categories', 'CategoryController');
+Route::post('category/delAll', array('as' => 'category.deleteAll', 'uses' => 'CategoryController@destroyAll'));
+Route::get('category/search', array('as' => 'category.search', 'uses' => 'CategoryController@search'));
+Route::resource('category', 'CategoryController');
+
+Route::post('supplier/delAll', array('as' => 'supplier.deleteAll', 'uses' => 'SupplierController@destroyAll'));
+Route::get('supplier/search', array('as' => 'supplier.search', 'uses' => 'SupplierController@search'));
+Route::resource('supplier', 'SupplierController');
+
 
 Route::get('products', function () {
 	return View::make('admin.pages.product.index');

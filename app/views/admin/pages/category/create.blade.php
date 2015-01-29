@@ -12,13 +12,13 @@
         </h1>
         <ol class="breadcrumb">
             <li>
-                <i class="fa fa-dashboard"></i>  <a href="index.html">Dashboard</a>
+                <i class="fa fa-dashboard"></i>  <a href="{{ URL::to('dashboard') }}"> Dashboard</a>
             </li>
             <li>
-                <i class="fa fa-file"></i> Category
+                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('category') }}"> category</a>
             </li>
             <li class="active">
-                <i class="fa fa-file"></i> Form category
+                <i class="fa fa-edit"></i> Form add category
             </li>
         </ol>
     </div>
@@ -30,10 +30,11 @@
         
         <div class="row">
             <div class="col-md-12">
-                <a href="{{ url('categories') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
+                <a href="{{ url('category') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
             </div>
         </div>
         <br>
+
         @if ($errors->has())
         <div class="alert alert-danger">
             @foreach ($errors->all() as $error)
@@ -42,17 +43,12 @@
         </div>
         @endif
 
-        @if (Session::has('result'))
-        <div class="alert {{ Session::get('result')['status'] }}">
-            {{ Session::get('result')['message'] }}
-        </div>
-        @endif
         <div class="panel panel-default">
             <div class="panel-heading">
                 <h3 class="panel-title">Add category</h3>
             </div>
             <div class="panel-body">
-                {{ Form::open(array('url' => 'categories', 'class' => 'form-horizontal')) }}
+                {{ Form::open(array('url' => 'category', 'class' => 'form-horizontal')) }}
                     <div class="form-group @if ($errors->has('name')) has-error @endif">
                         <label for="name" class="col-sm-2 control-label">Category name</label>
                         <div class="col-sm-10">

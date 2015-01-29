@@ -1,6 +1,6 @@
 <?php
 
-class CategoryController extends \BaseController {
+class SupplierController extends \BaseController {
 
 	protected $layout = 'admin.layouts.master';
 
@@ -11,11 +11,11 @@ class CategoryController extends \BaseController {
 	 */
 	public function index()
 	{
-		$categories = Category::orderBy('id', 'DESC')->paginate(10);
-		$listData['categories'] = $categories;
+		$suppliers = Supplier::orderBy('id', 'DESC')->paginate(10);
+		$listData['suppliers'] = $suppliers;
 		
-		$this->layout->content = View::make('admin.pages.category.index')->with('listData', $listData);
-		$this->layout->popup = View::make('admin.pages.category.popup')->render();
+		$this->layout->content = View::make('admin.pages.supplier.index')->with('listData', $listData);
+		$this->layout->popup = View::make('admin.pages.supplier.popup')->render();
 
 		return $this->layout;
 	}
@@ -36,7 +36,7 @@ class CategoryController extends \BaseController {
 			$options[$value->id] = $value->name;
 		}
 
-		return View::make('admin.pages.category.create', compact('options'));
+		return View::make('admin.pages.supplier.create', compact('options'));
 	}
 
 

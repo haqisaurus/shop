@@ -45,8 +45,7 @@
                     <!-- Header page -->
                 @show
 
-
-                @yield('content')
+                @yield('content', 'Default content')
 
             </div>
             <!-- /.container-fluid -->
@@ -57,6 +56,12 @@
     </div>
     <!-- /#wrapper -->
 
+    <!-- popup -->
+    @if(isset($popup))
+        {{ $popup }}
+    @endif
+    <!-- /popup -->
+
     <!-- jQuery -->
     {{HTML::script('assets/admin/js/jquery.js')}}
 
@@ -64,9 +69,7 @@
     {{HTML::script('assets/admin/js/bootstrap.min.js')}}
 
     <!-- Morris Charts JavaScript -->
-    {{HTML::script('assets/admin/js/plugins/morris/raphael.min.js')}}
-    {{HTML::script('assets/admin/js/plugins/morris/morris.min.js')}}
-    {{HTML::script('assets/admin/js/plugins/morris/morris-data.js')}} 
+    {{HTML::script('assets/admin/js/engine.js')}}
 
 </body>
 

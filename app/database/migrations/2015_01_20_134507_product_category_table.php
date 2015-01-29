@@ -16,9 +16,9 @@ class ProductCategoryTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->longText('desctription');
+			$table->longText('description');
 			$table->integer('level');
-			$table->integer('category_id');
+			$table->integer('parent_id');
 
 			$table->timestamps();
 		});
