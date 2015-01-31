@@ -21,8 +21,8 @@ class ProductTable extends Migration {
 			$table->string('price');
 			$table->integer('quantity');
 			$table->decimal('discount', 5, 2);
-			$table->integer('product_category_id');
-			$table->integer('product_supplier_id');
+			$table->integer('category_id');
+			$table->integer('supplier_id');
 			$table->integer('user_id');
 			$table->timestamps();
 		});

@@ -11,7 +11,7 @@ class ProductController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::orderBy('id', 'DESC')->paginate(2);
+		$products = Product::orderBy('id', 'DESC')->paginate(10);
 		$listData['products'] = $products;
 		
 		$this->layout->content = View::make('admin.pages.product.index')->with('listData', $listData);
@@ -28,11 +28,22 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
+		$depend['suppliers'] = array();
+		$depend['categories'] = array();
 
-		$depend['categories'] = Category::all();
-		$depend['supplier'] = Supplier::all();
+		foreach (Supplier::all() as $key => $value) {
+			$depend['suppliers'][$value->id] = $value->name;
+		}
 
-		return View::make('admin.pages.product.create')->with('depend', $depend);
+		foreach (Category::all() as $key => $value) {
+			$depend['categories'][$value->id] = $value->name;
+		}
+
+		$depend['status'] = array('available', 'out of stock');
+
+		$this->layout->content = View::make('admin.pages.product.create')->with('depend', $depend);
+		return $this->layout;
+
 	}
 
 
@@ -46,15 +57,21 @@ class ProductController extends \BaseController {
 
 		$rules = array(
 		    'name'    		=> 'required', 
-		    'description' 	=> 'alpha_dash',
-		    'address' 		=> 'required',
-		    'logo' 			=> '',
+		    'status' 		=> 'required',
+		    'description' 	=> 'required',
+		    'category' 		=> 'required',
+		   	'price'			=> 'required',
+		    'quantity' 		=> 'required',
+		    'supplier' 		=> 'required',
 		);
 
 		$name = Input::get('name');
+		$status = Input::get('status');
 		$description = Input::get('description');
-		$address = Input::get('address');
-		$logo = Input::file('logo');
+		$category = Input::get('category');
+		$price = Input::get('price');
+		$quantity = Input::get('quantity');
+		$supplier = Input::get('supplier');
 
 		$validator = Validator::make(Input::all(), $rules);
 		
@@ -69,29 +86,29 @@ class ProductController extends \BaseController {
 			$product = new Product;
 			$product->name = $name;
 			$product->description = $description;
-			$product->address = $address;
-
-			if (Input::hasFile('logo'))
-			{
-				$filename = str_random(12) . '.' . $logo->getClientOriginalExtension();
-				$uploadResult = Input::file('logo')->move('uploads/product-logo', $filename);
-				$product->path = $uploadResult->getPathName();
-			}
-			else
-			{
-				$product->path = 'uploads/default/100x100.gif';
-			}
-			
+			$product->status = $status;
+			$product->category_id = $category;
+			$product->price = $price;
+			$product->quantity = $quantity;
+			$product->supplier_id = $supplier;
+			$product->user_id = 0;
+			// $product->user_id = Auth::user()->id;
 
 			$result = $product->save();
 
 			if ($result) {
-				return Redirect::to('product')->with('result', array('status' => 'alert-success', 'message' => 'Input success' ));
+				return Redirect::to('product/files/' . $product->id); 
 			} else {
 				return Redirect::to('product/create')>withInput(); 
 			}
 			
 		}
+	}
+
+	public function createFiles($id)
+	{
+		$this->layout->content = View::make('admin.pages.product.create-media')->with('productId', $id);
+		return $this->layout;
 	}
 
 
@@ -191,10 +208,10 @@ class ProductController extends \BaseController {
         // redirect
         if ($result) {
         	return Redirect::to('product')
-        		->with('result', array('status' => 'alert-success', 'message' => 'Successfully deleted the category!' ));
+        		->with('result', array('status' => 'alert-success', 'message' => 'Successfully deleted the product!' ));
 		} else {
 			return Redirect::to('product')
-        		->with('result', array('status' => 'alert-success', 'message' => 'Failed to delete!' ));
+        		->with('result', array('status' => 'alert-danger', 'message' => 'Failed to delete!' ));
 		}
 	}
 
@@ -231,7 +248,33 @@ class ProductController extends \BaseController {
 
 	public function upload()
 	{
-		print_r(Input::file('files'));
+
+		$id = Input::get('data');
+		$file = Input::file('product-media');
+
+		if (Input::hasFile('product-media'))
+		{
+			$filename = str_random(12) . '.' . $file->getClientOriginalExtension();
+			$uploadResult = $file->move('uploads/product-media/' . $id, $filename);
+
+			$media = new Media;
+			$media->url = $uploadResult->getPathName();
+			$media->product_id = $id;
+			
+			$result = $media->save();
+
+			if ($result) {
+				echo json_encode(array('status' => TRUE, 'message' => 'upload success'));
+			}
+			else
+			{
+				echo json_encode(array('status' => FALSE, 'message' => 'upload failed'));
+			}
+		}
+		else
+		{
+			echo json_encode(array('status' => FALSE, 'message' => 'upload failed'));
+		}
 	}
 	// END : AJAX FUNCTIONS 
 

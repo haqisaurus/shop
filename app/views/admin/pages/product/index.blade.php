@@ -71,9 +71,9 @@
                         <td><input type="checkbox" name="selected-rows[]" class="checkthis" value="{{ $product->id }}"></td>
                         <td>{{ $product->name }}</td>
                         <td>{{ $product->price }}</td>
-                        <td>{{ $product->stock }}</td>
+                        <td>{{ $product->quantity }}</td>
                         <td>{{ $product->status }}</td>
-                        <td>{{ $product->supplier }}</td>
+                        <td>{{ $product->supplier->name }}</td>
                         <td>{{ $product->discount }}</td>
                         <td>
                             {{ Form::open(array('url' => 'product/'. $product->id . '/edit', 'class' => 'inline')) }}

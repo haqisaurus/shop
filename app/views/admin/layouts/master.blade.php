@@ -9,7 +9,7 @@
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>SB Admin - Bootstrap Admin Template</title>
+    <title>Admin - Myshop</title>
 
     <!-- Bootstrap Core CSS -->
     {{HTML::style('assets/admin/css/bootstrap.min.css')}}
@@ -31,7 +31,8 @@
 </head>
 
 <body>
-
+    <input type="hidden" id="BASE_URL" value="{{ asset('/') }}">
+    <input type="hidden" id="SITE_URL" value="{{ URL::to('/') }}">
     <div id="wrapper">
 
         <!-- Navigation -->

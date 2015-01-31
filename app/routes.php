@@ -51,6 +51,7 @@ Route::resource('supplier', 'SupplierController');
 Route::post('product/delAll', array('as' => 'product.deleteAll', 'uses' => 'ProductController@destroyAll'));
 Route::get('product/search', array('as' => 'product.search', 'uses' => 'ProductController@search'));
 Route::post('product/upload', array('as' => 'product.upload', 'uses' => 'ProductController@upload'));
+Route::get('product/files/{id}', array('as' => 'product.files', 'uses' => 'ProductController@createFiles'));
 Route::resource('product', 'ProductController');
 
 Route::get('suppliers', function () {

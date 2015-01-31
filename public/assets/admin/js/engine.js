@@ -1,3 +1,6 @@
+var BASE_URL = $('#BASE_URL').val();
+var SITE_URL = $('#SITE_URL').val();
+
 $('#mytable')
 .off('click', '#checkall')
 .on('click', '#checkall', function () {
@@ -33,7 +36,7 @@ $('#delete-selected-popup')
 .on('click', '#delete-selected-button', function() {
 
     var selectedId = $('#mytable').find('input[name="selected-rows[]"]:checked').map(function() { return $(this).val() }).get(),
-        url = $(this).attr('data-url');
+    url = $(this).attr('data-url');
 
     $.ajax({
         url: url,
@@ -57,87 +60,70 @@ $('#delete-selected-popup')
 
 $("[data-toggle=tooltip]").tooltip();
 
+var indexUpload = 1,
+    href = window.location.href,
+    index =href.substr(href.lastIndexOf('/') + 1);
+
 $('#fileupload').fileupload({
+    url: SITE_URL + '/product/upload',
     dataType: 'json',
+    sequentialUploads: true,
+    formData: { data : index},
     done: function (e, data) {
-        $.each(data.result.files, function (index, file) {
-            $('<p/>').text(file.name).appendTo(document.body);
-        });
-    }
-});
-
-/*
- * jQuery File Upload Plugin JS Example 8.9.1
- * https://github.com/blueimp/jQuery-File-Upload
- *
- * Copyright 2010, Sebastian Tschan
- * https://blueimp.net
- *
- * Licensed under the MIT license:
- * http://www.opensource.org/licenses/MIT
- */
-
-/* global $, window */
-
-$(function () {
-    'use strict';
-
-    // Initialize the jQuery File Upload widget:
-    $('#fileupload').fileupload({
-        // Uncomment the following to send cross-domain cookies:
-        //xhrFields: {withCredentials: true},
-        url: 'upload'
-    });
-
-    // Enable iframe cross-domain access via redirect option:
-    $('#fileupload').fileupload(
-        'option',
-        'redirect',
-        window.location.href.replace(
-            /\/[^\/]*$/,
-            '/cors/result.html?%s'
-        )
-    );
-
-    if (window.location.hostname === 'blueimp.github.io') {
-        // Demo settings:
-        $('#fileupload').fileupload('option', {
-            url: '//jquery-file-upload.appspot.com/',
-            // Enable image resizing, except for Android and Opera,
-            // which actually support image resizing, but fail to
-            // send Blob objects via XHR requests:
-            disableImageResize: /Android(?!.*Chrome)|Opera/
-                .test(window.navigator.userAgent),
-            maxFileSize: 5000000,
-            acceptFileTypes: /(\.|\/)(gif|jpe?g|png)$/i
-        });
-        // Upload server status check for browsers with CORS support:
-        if ($.support.cors) {
-            $.ajax({
-                url: '//jquery-file-upload.appspot.com/',
-                type: 'HEAD'
-            }).fail(function () {
-                $('<div class="alert alert-danger"/>')
-                    .text('Upload server currently unavailable - ' +
-                            new Date())
-                    .appendTo('#fileupload');
-            });
+        if (data.result.status) {
+            $('#media-progress').find('tr').eq(indexUpload).find('.right').html('<i class="fa fa-check-circle-o"></i>');
+        } else {
+            $('#media-progress').find('tr').eq(indexUpload).find('.right').html('<i class="fa fa-times-circle-o"></i>');
         }
-    } else {
-        // Load existing files:
-        $('#fileupload').addClass('fileupload-processing');
-        $.ajax({
-            // Uncomment the following to send cross-domain cookies:
-            //xhrFields: {withCredentials: true},
-            url: $('#fileupload').fileupload('option', 'url'),
-            dataType: 'json',
-            context: $('#fileupload')[0]
-        }).always(function () {
-            $(this).removeClass('fileupload-processing');
-        }).done(function (result) {
-            $(this).fileupload('option', 'done')
-                .call(this, $.Event('done'), {result: result});
-        });
-    }
 
+        indexUpload++;
+    },
+    fail: function (e, data) {
+        $('#media-progress').find('tr').eq(indexUpload).find('.right').html('<i class="fa fa-times-circle-o"></i>');
+        indexUpload++;
+    },
+    progress: function (e, data) {
+
+        var parent = $('#media-progress'),
+            length = parent.find('tr').length,
+            tr = $('<tr/>', { 'class' : 'row-' + length }),
+            td = $('<td/>'),
+            img = $('<img/>', { 'class' : 'image-preview'}),
+            progress = $('<div/>', { 'class' : 'progress'}),
+            bar = $('<div/>', { 'class' : 'progress-bar bar-' + length, 'role' : 'progressbar', 'aria-valuenow' : 0, 'aria-valuemin' : 0, 'aria-valuemax' : '100' });
+        
+        parent.append(tr.append([
+            $('<td/>', { 'class' : ''}).append(length), 
+            $('<td/>', { 'class' : 'left'}).append(img), 
+            $('<td/>', { 'class' : 'center'}).append(progress.append(bar)),
+            $('<td/>', { 'class' : 'right'}).append($('<img/>', { 'class' : 'image-status'}).attr('src', BASE_URL + 'assets/admin/img/loader.gif'))
+            ]));
+
+        var percent = parseInt(data.loaded / data.total * 100, 10);
+        parent.find('.bar-' + length).css('width', percent + '%').text(percent);
+
+        if (data.files && data.files[0]) {
+            var reader = new FileReader();
+            reader.onload = function(e) {
+                parent.find('.row-' + length).find(img).attr('src', e.target.result);
+            }
+            reader.readAsDataURL(data.files[0]);
+        }
+    },
+    add: function (e, data) {
+        var goUpload = true;
+        var uploadFile = data.files[0];
+        if (!(/\.(gif|jpg|jpeg|tiff|png|svg)$/i).test(uploadFile.name)) {
+            alert('You must select an image file only');
+            goUpload = false;
+        }
+        if (uploadFile.size > 2000000) { // 2mb
+            alert('Please upload a smaller image, max size is 2 MB');
+            goUpload = false;
+        }
+        if (goUpload == true) {
+            data.submit();
+        }
+    },
 });
+

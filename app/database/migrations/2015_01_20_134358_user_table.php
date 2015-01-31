@@ -19,6 +19,7 @@ class UserTable extends Migration {
 			$table->string('lastname');
 			$table->string('email');
 			$table->string('password');
+			$table->string('photo');
 			$table->string('role_id');
 			$table->timestamps();
 		});

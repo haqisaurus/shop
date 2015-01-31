@@ -53,7 +53,7 @@
                     <!-- Nav tabs -->
                     <ul class="nav nav-tabs" role="tablist">
                         <li role="presentation" class="active"><a href="#main" aria-controls="main" role="tab" data-toggle="tab">Main data</a></li>
-                        <li role="presentation"><a href="#images" aria-controls="images" role="tab" data-toggle="tab">Images</a></li>
+                        <li role="presentation" class="disabled"><a href="#images" aria-controls="" role="tab" data-toggle="">Images</a></li>
                     </ul>
 
                     <!-- Tab panes -->
@@ -61,136 +61,79 @@
                         <div role="tabpanel" class="tab-pane active" id="main">
                             <br>
                             {{ Form::open(array('url' => 'product', 'class' => 'form-horizontal')) }}
-                            <div class="form-group">
-                                <label for="name" class="col-sm-2 control-label">Product ame</label>
+                            <div class="form-group @if ($errors->has('name')) has-error @endif">
+                                <label for="name" class="col-sm-2 control-label">Product name</label>
                                 <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="name" placeholder="Name">
+                                    {{ Form::text('name', Input::old('name'), array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @if ($errors->has('status')) has-error @endif">
                                 <label for="status" class="col-sm-2 control-label">Status</label>
-                                <div class="col-sm-10">
-                                    <select id="status" name="status" class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
+                                <div class="col-sm-4">
+                                    {{ Form::select('status', $depend['status'], Input::old('status'), array('id' => 'status', 'class' => 'form-control')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @if ($errors->has('description')) has-error @endif">
                                 <label for="description" class="col-sm-2 control-label">Description</label>
                                 <div class="col-sm-10">
-                                    <textarea class="form-control" id="description" placeholder="Description"></textarea>
+                                    {{ Form::textarea('description', Input::old('description'), array('id' => 'description', 'class' => 'form-control', 'placeholder' => 'Description')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="parent" class="col-sm-2 control-label">Product</label>
-                                <div class="col-sm-10">
-                                    <select id="parent" name="product" class="form-control">
-                                        <option>1</option>
-                                        <option>2</option>
-                                        <option>3</option>
-                                        <option>4</option>
-                                        <option>5</option>
-                                    </select>
-                                </div>
-                            </div>
-
-                            <div class="form-group">
-                                <label for="inputPassword3" class="col-sm-2 control-label">Logo</label>
+                            <div class="form-group @if ($errors->has('category')) has-error @endif">
+                                <label for="category" class="col-sm-2 control-label">Category</label>
                                 <div class="col-sm-4">
-                                    <img src="http://placehold.it/100x100" class="img-responsive img-rounded" alt="Responsive image">
-                                    <br>
-                                    <input type="file" class="form-control" id="inputPassword3" placeholder="logo">
+                                    {{ Form::select('category', $depend['categories'], Input::old('category'), array('id' => 'category', 'class' => 'form-control')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @if ($errors->has('price')) has-error @endif">
                                 <label for="price" class="col-sm-2 control-label">Price</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="price" placeholder="Price">
+                                <div class="col-sm-3">
+                                    {{ Form::text('price', Input::old('price'), array('id' => 'price', 'class' => 'form-control', 'placeholder' => 'Price')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @if ($errors->has('quantity')) has-error @endif">
                                 <label for="quantity" class="col-sm-2 control-label">Quantity</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="quantity" placeholder="Quantity">
+                                <div class="col-sm-3">
+                                    {{ Form::text('quantity', Input::old('quantity'), array('id' => 'quantity', 'class' => 'form-control', 'placeholder' => 'Quantity')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
-                                <label for="manufacture" class="col-sm-2 control-label">Manufacture</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="manufacture" placeholder="Manufacture">
+                            <div class="form-group @if ($errors->has('supplier')) has-error @endif">
+                                <label for="supplier" class="col-sm-2 control-label">Supplier</label>
+                                <div class="col-sm-4">
+                                    {{ Form::select('supplier', $depend['suppliers'], Input::old('supplier'), array('id' => 'supplier', 'class' => 'form-control')) }}
                                 </div>
                             </div>
 
-                            <div class="form-group">
+                            <div class="form-group @if ($errors->has('discount')) has-error @endif">
                                 <label for="discount" class="col-sm-2 control-label">Discount</label>
-                                <div class="col-sm-10">
-                                    <input type="text" class="form-control" id="discount" placeholder="Discount">
+                                <div class="col-sm-2">
+                                    {{ Form::text('discount', Input::old('discount'), array('id' => 'discount', 'class' => 'form-control', 'placeholder' => 'Discount')) }}
                                 </div>
                             </div>
 
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
-                                    <button type="submit" class="btn btn-default">Submit</button>
+                                    <button type="submit" class="btn btn-primay">Save and next</button>
                                 </div>
                             </div>
+
                             {{ Form::close() }}
                         </div>
+
                         <div role="tabpanel" class="tab-pane" id="images">
-                            <form id="fileupload" action="upload" method="POST" enctype="multipart/form-data" class="">
-                                <!-- The fileupload-buttonbar contains buttons to add/delete files and start/cancel the upload -->
-                                <div class="row fileupload-buttonbar">
-                                    <div class="col-lg-7">
-                                        <!-- The fileinput-button span is used to style the file input field as button -->
-                                        <span class="btn btn-success fileinput-button">
-                                            <i class="glyphicon glyphicon-plus"></i>
-                                            <span>Add files...</span>
-                                            <input type="file" name="files[]" multiple="">
-                                        </span>
-                                        <button type="submit" class="btn btn-primary start">
-                                            <i class="glyphicon glyphicon-upload"></i>
-                                            <span>Start upload</span>
-                                        </button>
-                                        <button type="reset" class="btn btn-warning cancel">
-                                            <i class="glyphicon glyphicon-ban-circle"></i>
-                                            <span>Cancel upload</span>
-                                        </button>
-                                        <button type="button" class="btn btn-danger delete">
-                                            <i class="glyphicon glyphicon-trash"></i>
-                                            <span>Delete</span>
-                                        </button>
-                                        <input type="checkbox" class="toggle">
-                                        <!-- The global file processing state -->
-                                        <span class="fileupload-process"></span>
-                                    </div>
-                                    <!-- The global progress state -->
-                                    <div class="col-lg-5 fileupload-progress fade">
-                                        <!-- The global progress bar -->
-                                        <div class="progress progress-striped active" role="progressbar" aria-valuemin="0" aria-valuemax="100">
-                                            <div class="progress-bar progress-bar-success" style="width:0%;"></div>
-                                        </div>
-                                        <!-- The extended global progress state -->
-                                        <div class="progress-extended">&nbsp;</div>
-                                    </div>
-                                </div>
-                                <!-- The table listing the files available for upload/download -->
-                                <table role="presentation" class="table table-striped"><tbody class="files"></tbody></table>
-                            </form>
+                            
                         </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
- @stop
+    @stop
 </div>
 <!-- /.row -->

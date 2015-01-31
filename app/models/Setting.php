@@ -2,5 +2,5 @@
 
 class Setting extends \Eloquent {
 	protected $fillable = [];
-	protected $table = 'configuration';
+	protected $table = 'setting';
 }

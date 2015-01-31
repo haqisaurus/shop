@@ -16,7 +16,7 @@ class SettingTable extends Migration {
 		{
 			$table->increments('id');
 			$table->string('name');
-			$table->string('own');
+			$table->string('owner');
 			$table->string('address');
 			$table->string('email');
 			$table->string('phone');
