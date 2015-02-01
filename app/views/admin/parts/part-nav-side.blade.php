@@ -33,7 +33,7 @@
             <a href="{{ url('messages') }}"><i class="fa fa-inbox"></i> Message</a>
         </li>
         <li>
-            <a href="{{ url('users') }}"><i class="fa fa-users"></i> Users</a>
+            <a href="{{ url('user') }}"><i class="fa fa-users"></i> Users</a>
         </li>
         <li>
             <a href="{{ url('settings') }}"><i class="fa fa-cogs"></i> Settings</a>

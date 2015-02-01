@@ -54,6 +54,12 @@ Route::post('product/upload', array('as' => 'product.upload', 'uses' => 'Product
 Route::get('product/files/{id}', array('as' => 'product.files', 'uses' => 'ProductController@createFiles'));
 Route::resource('product', 'ProductController');
 
+
+Route::get('user/search', array('as' => 'user.search', 'uses' => 'UserController@search'));
+Route::get('user/login', array('as' => 'user.login', 'uses' => 'UserController@showLogin'));
+Route::post('user/login', array('as' => 'user.login', 'uses' => 'UserController@doLogin'));
+Route::resource('user', 'UserController');
+
 Route::get('suppliers', function () {
 	return View::make('admin.pages.list-supplier');
 });

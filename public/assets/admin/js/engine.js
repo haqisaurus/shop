@@ -27,8 +27,18 @@ $('#delete-popup')
 .off('click', '#delete-button')
 .on('click', '#delete-button', function() {
     var id = $(this).attr('data-row-id');
-    $('#' + id).find('.delete-row').submit();
-    console.log($('#' + id))
+    if ($('#delete-view')) {
+        $('#delete-view').submit()
+    } else{
+        $('#' + id).find('.delete-row').submit();
+    };
+});
+
+$('.panel-footer')
+.off('click', '#delete-view')
+.on('click', '#delete-view', function(e) {
+    var id = $(this).attr('data-id');
+    $('#delete-button').attr('data-row-id', id);
 });
 
 $('#delete-selected-popup')

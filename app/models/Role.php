@@ -4,8 +4,8 @@ class Role extends \Eloquent {
 	
 	protected $table = 'user_role';
 
-    public function users()
+    public function user()
     {
-        return $this->hasMany('User', 'user_role_id');
+        return $this->hasMany('User', 'role_id');
     }
 }
