@@ -60,54 +60,9 @@ Route::get('user/login', array('as' => 'user.login', 'uses' => 'UserController@s
 Route::post('user/login', array('as' => 'user.login', 'uses' => 'UserController@doLogin'));
 Route::resource('user', 'UserController');
 
-Route::get('suppliers', function () {
-	return View::make('admin.pages.list-supplier');
-});
-	
-	Route::get('add-supplier', function () {
-		return View::make('admin.pages.form-supplier');
-	});
 
-Route::get('orders', function () {
-	return View::make('admin.pages.list-order');
-});
+Route::resource('message', 'MessageController');
 
-	Route::get('edit-order', function () {
-		return View::make('admin.pages.form-order');
-	});
-
-	Route::get('detail-order', function () {
-		return View::make('admin.pages.detail-order');
-	});
-
-Route::get('returns', function () {
-	return View::make('admin.pages.list-return');
-});
-
-Route::get('messages', function () {
-	return View::make('admin.pages.list-message');
-});
-
-Route::get('users', function () {
-	return View::make('admin.pages.list-user');
-});
-	Route::get('edit-user', function () {
-		return View::make('admin.pages.form-user');
-	});
-
-Route::get('settings', function () {
-
-		$setting = Setting::all();
-		foreach ($setting as $key => $value) {
-			print_r($value->name);
-		}
-
-        // $setting->name = "Nova";
-        // $setting->owner = "admin";
-        // $setting->address = "jakal";
-        // $setting->email = "haqisalla@gmail.com";
-        // $setting->telephone = "099878789";
-        // $setting->logo = "admin";
-        // $setting->save();
-	// return View::make('admin.pages.setting.edit');
+Route::get('setting', function () {
+	return View::make('admin.pages.setting.edit');
 });

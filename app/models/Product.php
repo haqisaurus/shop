@@ -14,6 +14,11 @@ class Product extends \Eloquent {
         return $this->belongsTo('Category', 'category_id');
     }
 
+    public function user()
+    {
+        return $this->belongsTo('User', 'user_id');
+    }
+
     public function media()
     {
         return $this->hasMany('Media', 'product_id');
