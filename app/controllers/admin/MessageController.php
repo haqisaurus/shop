@@ -9,10 +9,19 @@ class MessageController extends \BaseController {
 	 *
 	 * @return Response
 	 */
-	public function index()
+	public function index($id = 0)
 	{
-		$this->layout->content = View::make('admin.pages.message.index');
-		// $this->layout->popup = View::make('admin.pages.message.popup')->render();
+		$data['messages'] = Message::orderBy('id', 'desc')->get();
+
+		if ($id) {
+			$data['list'] = Message::find($id)->messageDetailASC;
+			$data['activeId'] = $id;
+		} else {
+			$data['list'] = Message::orderBy('id', 'desc')->first()->messageDetailASC;
+		}
+		
+		
+		$this->layout->content = View::make('admin.pages.message.index')->with('data', $data);
 
 		return $this->layout;
 	}
@@ -25,7 +34,6 @@ class MessageController extends \BaseController {
 	 */
 	public function create()
 	{
-		//
 	}
 
 
@@ -36,7 +44,37 @@ class MessageController extends \BaseController {
 	 */
 	public function store()
 	{
-		//
+		$rules = array(
+		    'message_id'    => '', 
+		    'message' 		=> 'alpha_dash',
+		);
+
+		$messageId = Input::get('message_id');
+		$message_text = Input::get('message');
+
+		$validator = Validator::make(Input::all(), $rules);
+		
+		if ($validator->fails()) {
+
+		    return Redirect::to('message')
+		        ->withErrors($validator) 
+		        ->withInput(); 
+		} else {
+
+			$message = new Messagedetail;
+			$message->message_text = $message_text;
+			$message->message_id = $messageId;
+			$message->user_id = Auth::user()->id;
+			
+
+			$result = $message->save();
+
+			if ($result) {
+				return Redirect::to('message')->with('result', array('status' => 'alert-success', 'message' => 'Input success' ));
+			} else {
+				return Redirect::to('message')->withInput(); 
+			}
+		}
 	}
 
 
@@ -85,6 +123,15 @@ class MessageController extends \BaseController {
 	public function destroy($id)
 	{
 		//
+	}
+
+	public function getMessageDetail($id)
+	{
+		
+
+		$this->layout->content = View::make('admin.pages.message.index')->with('data', $data);
+
+		return $this->layout;
 	}
 
 

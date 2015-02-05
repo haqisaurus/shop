@@ -137,3 +137,33 @@ $('#fileupload').fileupload({
     },
 });
 
+// $('.list-group')
+// .off('click', '.parent-message')
+// .on('click', '.parent-message', function() {
+
+//     var id = $(this).attr('data-id');
+
+//     $('.list-group').find('.parent-message').removeClass('active');
+//     $(this).addClass('active');
+    
+//     $.ajax({
+//         url: SITE_URL + '/message/list',
+//         type: 'POST',
+//         dataType: 'json',
+//         data: {'id': id},
+//     })
+//     .done(function(response) {
+//         var source = $("#test").html();
+//         var template = Handlebars.compile(source);
+//         var html = template({messages : response});
+//         $('.chat').html(html);
+//         console.log(response);
+//     })
+//     .fail(function() {
+//         console.log("error");
+//     })
+//     .always(function() {
+//         console.log("complete");
+//     });
+    
+// });

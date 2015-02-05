@@ -30,13 +30,13 @@
             </ul>
         </li>
         <li>
-            <a href="{{ url('messages') }}"><i class="fa fa-inbox"></i> Message</a>
+            <a href="{{ url('message') }}"><i class="fa fa-inbox"></i> Message</a>
         </li>
         <li>
             <a href="{{ url('user') }}"><i class="fa fa-users"></i> Users</a>
         </li>
         <li>
-            <a href="{{ url('settings') }}"><i class="fa fa-cogs"></i> Settings</a>
+            <a href="{{ url('setting') }}"><i class="fa fa-cogs"></i> Settings</a>
         </li>
     </ul>
 </div>

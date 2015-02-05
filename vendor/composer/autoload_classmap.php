@@ -6,6 +6,7 @@ $vendorDir = dirname(dirname(__FILE__));
 $baseDir = dirname($vendorDir);
 
 return array(
+    'Address' => $baseDir . '/app/models/Address.php',
     'BaseController' => $baseDir . '/app/controllers/BaseController.php',
     'Boris\\Boris' => $vendorDir . '/d11wtq/boris/lib/Boris/Boris.php',
     'Boris\\CLIOptionsHandler' => $vendorDir . '/d11wtq/boris/lib/Boris/CLIOptionsHandler.php',
@@ -458,7 +459,13 @@ return array(
     'Jeremeamia\\SuperClosure\\Visitor\\MagicConstantVisitor' => $vendorDir . '/jeremeamia/SuperClosure/src/Jeremeamia/SuperClosure/Visitor/MagicConstantVisitor.php',
     'Math_BigInteger' => $vendorDir . '/phpseclib/phpseclib/phpseclib/Math/BigInteger.php',
     'Media' => $baseDir . '/app/models/Media.php',
+    'Message' => $baseDir . '/app/models/Message.php',
     'MessageController' => $baseDir . '/app/controllers/admin/MessageController.php',
+    'MessageDetailTable' => $baseDir . '/app/database/migrations/2015_02_04_124434_message_detail_table.php',
+    'MessageDetailTableSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
+    'MessageTable' => $baseDir . '/app/database/migrations/2015_02_04_124417_message_table.php',
+    'MessageTableSeeder' => $baseDir . '/app/database/seeds/DatabaseSeeder.php',
+    'Messagedetail' => $baseDir . '/app/models/Messagedetail.php',
     'Monolog\\ErrorHandler' => $vendorDir . '/monolog/monolog/src/Monolog/ErrorHandler.php',
     'Monolog\\Formatter\\ChromePHPFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/ChromePHPFormatter.php',
     'Monolog\\Formatter\\ElasticaFormatter' => $vendorDir . '/monolog/monolog/src/Monolog/Formatter/ElasticaFormatter.php',
@@ -1308,6 +1315,7 @@ return array(
     'Symfony\\Component\\HttpKernel\\CacheWarmer\\CacheWarmerInterface' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/CacheWarmerInterface.php',
     'Symfony\\Component\\HttpKernel\\CacheWarmer\\WarmableInterface' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/CacheWarmer/WarmableInterface.php',
     'Symfony\\Component\\HttpKernel\\Client' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/Client.php',
+    'Symfony\\Component\\HttpKernel\\Config\\EnvParametersResource' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/Config/EnvParametersResource.php',
     'Symfony\\Component\\HttpKernel\\Config\\FileLocator' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/Config/FileLocator.php',
     'Symfony\\Component\\HttpKernel\\Controller\\ControllerReference' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/Controller/ControllerReference.php',
     'Symfony\\Component\\HttpKernel\\Controller\\ControllerResolver' => $vendorDir . '/symfony/http-kernel/Symfony/Component/HttpKernel/Controller/ControllerResolver.php',

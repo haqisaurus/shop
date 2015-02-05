@@ -21,6 +21,7 @@ Route::get('login', array('uses' => 'UserController@showLogin'));
 Route::post('login', array('uses' => 'UserController@doLogin'));
 
 Route::get('_admin', array('uses' => 'UserController@showAdminLogin'));
+Route::post('_admin', array('uses' => 'UserController@doLoginAdmin'));
 
 Route::group(array('before' => 'auth'), function()
 {
@@ -61,6 +62,7 @@ Route::post('user/login', array('as' => 'user.login', 'uses' => 'UserController@
 Route::resource('user', 'UserController');
 
 
+Route::get('message/{id}', array('as' => 'message.list', 'uses' => 'MessageController@index'));
 Route::resource('message', 'MessageController');
 
 Route::get('setting', function () {

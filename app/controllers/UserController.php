@@ -251,19 +251,13 @@ class UserController extends \BaseController {
 			// check is not admin
 
 		    $userdata = array(
-		    	'user_role_id' => 2,
+		    	// 'role_id' => 2,
 		        'email'     => Input::get('email'),
 		        'password'  => Input::get('password'),
 		    );
 
 		    if (Auth::attempt($userdata)) {
 
-
-		    	$user = User::find(1);
-
-				$user->password = Hash::make('tekanenter');
-
-				$user->save();
 		        return Redirect::to('dashboard');
 		    } else {        
 		    	return Redirect::to('login')

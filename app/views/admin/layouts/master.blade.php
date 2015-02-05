@@ -62,9 +62,14 @@
         {{ $popup }}
     @endif
     <!-- /popup -->
-
+    <!-- template -->
+    @if(isset($template))
+        {{ $template }}
+    @endif
+    <!-- /template -->
     <!-- jQuery -->
     {{HTML::script('assets/admin/js/jquery.js')}}
+    {{HTML::script('assets/admin/js/handlebars-v2.0.0.js')}}
 
     <!-- Bootstrap Core JavaScript -->
     {{HTML::script('assets/admin/js/bootstrap.min.js')}}

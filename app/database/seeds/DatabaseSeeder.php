@@ -17,6 +17,8 @@ class DatabaseSeeder extends Seeder {
 		$this->call('SettingTableSeeder');
 		$this->call('CategoryTableSeeder');
 		$this->call('SupplierTableSeeder');
+		$this->call('MessageTableSeeder');
+		$this->call('MessageDetailTableSeeder');
 
 	}
 
@@ -120,6 +122,60 @@ class SupplierTableSeeder extends Seeder {
 	        'description'  => 'Description',
 	        'address'    => 'Street',
 	        'path'    => '',
+	        )
+	    );
+    }
+}
+
+class MessageTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('message')->delete();
+        
+	    Message::create(array(
+	        'name'     => 'Message title',
+	        )
+	    );
+
+	    Message::create(array(
+	        'name'     => 'Message keren',
+	        )
+	    );
+    }
+}
+
+class MessageDetailTableSeeder extends Seeder {
+
+    public function run()
+    {
+        DB::table('message_detail')->delete();
+        
+	    Messagedetail::create(array(
+	        'message_text'     => 'Message admin',
+	        'message_id'     => 1,
+	        'user_id'     => 1,
+	        )
+	    );
+
+	    Messagedetail::create(array(
+	        'message_text'     => 'Message member',
+	        'message_id'     => 1,
+	        'user_id'     => 2,
+	        )
+	    );
+
+	    Messagedetail::create(array(
+	        'message_text'     => 'Message admin',
+	        'message_id'     => 2,
+	        'user_id'     => 1,
+	        )
+	    );
+
+	    Messagedetail::create(array(
+	        'message_text'     => 'Message member',
+	        'message_id'     => 2,
+	        'user_id'     => 2,
 	        )
 	    );
     }
