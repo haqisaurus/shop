@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function()
-{
-	return View::make('admin.pages.dashboard');
-});
+Route::get('/', array('uses' => 'PagesController@index'));
+Route::get('detail', array('uses' => 'PagesController@detail'));
+Route::get('contact', array('uses' => 'PagesController@contact'));
+Route::get('sale', array('uses' => 'PagesController@sale'));
 
 Route::get('login', array('uses' => 'UserController@showLogin'));
 
@@ -68,3 +68,5 @@ Route::resource('message', 'MessageController');
 Route::get('setting', function () {
 	return View::make('admin.pages.setting.edit');
 });
+
+Route::get('home', array('as' => 'user.login', 'uses' => 'UserController@showLogin'));
