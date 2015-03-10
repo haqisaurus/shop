@@ -43,7 +43,7 @@
         </div>
         @endif
 
-        <div class="panel panel-default">
+        <div class="panel panel-grey">
             <div class="panel-heading">
                 <h3 class="panel-title">Add supplier</h3>
             </div>

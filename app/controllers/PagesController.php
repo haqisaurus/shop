@@ -2,107 +2,62 @@
 
 class PagesController extends \BaseController {
 
-	protected $layout = 'frontend.theme1.layouts.master';
 
-	/**
-	 * Display a listing of the resource.
-	 *
-	 * @return Response
-	 */
+	protected $layout = 'frontend.theme2.layouts.master';
+
 	public function index()
 	{
-		$this->layout->content = View::make('frontend.theme1.pages.home');
+		$this->layout->content = View::make('frontend.theme2.pages.home');
+
+		return $this->layout;
+	}
+
+	public function product()
+	{
+		$this->layout->content = View::make('frontend.theme2.pages.products');
 
 		return $this->layout;
 	}
 
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function create()
-	{
-		//
-	}
-
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store()
-	{
-		//
-	}
-
-
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
-
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
-
 	public function detail()
 	{
-		$this->layout->content = View::make('frontend.theme1.pages.details');
+		$this->layout->content = View::make('frontend.theme2.pages.detail');
+
+		return $this->layout;
+	}
+
+	public function cart()
+	{
+		$this->layout->content = View::make('frontend.theme2.pages.cart');
+
+		return $this->layout;
+	}
+
+	public function checkout()
+	{
+		$this->layout->content = View::make('frontend.theme2.pages.checkout');
 
 		return $this->layout;
 	}
 
 	public function contact()
 	{
-		$this->layout->content = View::make('frontend.theme1.pages.contact');
+		$this->layout->content = View::make('frontend.theme2.pages.contact');
 
 		return $this->layout;
 	}
 
-	public function sale()
+	public function login()
 	{
-		$this->layout->content = View::make('frontend.theme1.pages.sale');
+		$this->layout->content = View::make('frontend.theme2.pages.login');
+
+		return $this->layout;
+	}
+
+	public function register()
+	{
+		$this->layout->content = View::make('frontend.theme2.pages.register');
 
 		return $this->layout;
 	}

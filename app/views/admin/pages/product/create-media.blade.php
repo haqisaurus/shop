@@ -5,29 +5,30 @@
 
     @section('header')
 
-    <div class="col-lg-12">
-        <h1 class="page-header">
-            Product
-            <small>Add product</small>
-        </h1>
-        <ol class="breadcrumb">
-            <li>
-                <i class="fa fa-dashboard"></i>  <a href="{{ URL::to('dashboard') }}"> Dashboard</a>
-            </li>
-            <li>
-                <i class="fa fa-code-fork"></i> <a href="{{ URL::to('product') }}"> product</a>
-            </li>
-            <li class="active">
-                <i class="fa fa-edit"></i> Form add product
-            </li>
+    <!--BEGIN TITLE & BREADCRUMB PAGE-->
+    <div id="title-breadcrumb-option-demo" class="page-title-breadcrumb">
+        <div class="page-header pull-left">
+            <div class="page-title">
+                Dashboard
+            </div>
+        </div>
+        <ol class="breadcrumb page-breadcrumb pull-right">
+            <li><i class="fa fa-home"></i>&nbsp;<a href="dashboard.html">Home</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+            <li class="hidden"><a href="#">Dashboard</a>&nbsp;&nbsp;<i class="fa fa-angle-right"></i>&nbsp;&nbsp;</li>
+            <li class="active">Dashboard</li>
         </ol>
+        <div class="clearfix">
+        </div>
     </div>
+    <!--END TITLE & BREADCRUMB PAGE-->
+
 
     @stop
 
     @section('content')
     <div class="col-lg-12">
-
+        
+        <br>
         <div class="row">
             <div class="col-md-12">
                 <a href="{{ url('product') }}" class="btn btn-primary pull-right"><span class="glyphicon glyphicon-circle-arrow-left"></span> Back</a>
@@ -43,7 +44,7 @@
         </div>
         @endif
 
-        <div class="panel panel-default">
+        <div class="panel panel-grey">
             <div class="panel-heading">
                 <h3 class="panel-title">Add product</h3>
             </div>
