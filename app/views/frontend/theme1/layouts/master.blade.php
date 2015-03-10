@@ -17,13 +17,9 @@ License URL: http://creativecommons.org/licenses/by/3.0/
     {{HTML::script('assets/' . $path . '/js/jquery.min.js')}}
 
     <!-- start slider -->       
-    {{HTML::style('assets/' . $path . '/css/slider.css')}}
 
     {{HTML::script('assets/' . $path . '/js/modernizr.custom.28468.js')}}
     {{HTML::script('assets/' . $path . '/js/jquery.cslider.js')}}
-
-    <!-- Owl Carousel Assets -->
-    {{HTML::style('assets/' . $path . '/css/owl.carousel.css')}}
 
     <!-- Owl Carousel Assets -->
     <!-- Prettify -->
