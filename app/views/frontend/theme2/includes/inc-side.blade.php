@@ -2,62 +2,29 @@
 	<div class=" top-nav rsidebar span_1_of_left">
 		<h3 class="cate">CATEGORIES</h3>
 		<ul class="menu">
-			<li class="item1">
-				<a href="#">Curabitur sapien
-					{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "arrow-img ")) }}
-				</a>
-				<ul class="cute">
-					<li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-					<li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-					<li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-				</ul>
-			</li>
-			<li class="item2">
-				<a href="#">Dignissim purus 
-					{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "arrow-img ")) }}
-				</a>
-				<ul class="cute">
-					<li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-					<li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-					<li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-				</ul>
-			</li>
-			<li class="item3">
-				<a href="#">Ultrices id du
-					{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "aarrow-img img-arrow")) }}
-				</a>
-				<ul class="cute">
-					<li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-					<li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-					<li class="subitem3"><a href="product.html">Automatic Fails</a></li>
-				</ul>
-			</li>
-			<li class="item4">
-				<a href="#">Cras iacaus rhone 
-					{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "arrow-img img-left-arrow")) }}
-				</a>
-				<ul class="cute">
-					<li class="subitem1"><a href="product.html">Cute Kittens </a></li>
-					<li class="subitem2"><a href="product.html">Strange Stuff </a></li>
-					<li class="subitem3"><a href="product.html">Automatic Fails </a></li>
-				</ul>
-			</li>
-			<li>
-				<ul class="kid-menu">
-					<li><a href="product.html">Tempus pretium</a></li>
-					<li ><a href="product.html">Dignissim neque</a></li>
-					<li ><a href="product.html">Ornared id aliquet</a></li>
-				</ul>
-			</li>
-			<ul class="kid-menu ">
-				<li><a href="product.html">Commodo sit</a></li>
-				<li ><a href="product.html">Urna ac tortor sc</a></li>
-				<li><a href="product.html">Ornared id aliquet</a></li>
-				<li><a href="product.html">Urna ac tortor sc</a></li>
-				<li ><a href="product.html">Eget nisi laoreet</a></li>
-				<li><a href="product.html">Faciisis ornare</a></li>
-				<li class="menu-kid-left"><a href="contact.html">Contact us</a></li>
-			</ul>
+			@if ($data['categories']->count())
+			    @foreach ($data['categories'] as $category)
+			    
+				@if ($category->level == 0)
+				<li class="item1">
+					<a href="#">
+						@if ($category->childs->count() > 0)
+							{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "")) }}
+						@endif
+
+						{{ $category->name }}
+					</a>
+					@if ($category->childs->count() > 0)
+					<ul class="cute">
+			    		@foreach ($category->childs as $childCategory)
+						<li class="subitem1"><a href="product.html">{{ $childCategory->name }} </a></li>
+						@endforeach
+					</ul>
+					@endif
+				</li>
+				@endif
+			  @endforeach
+			@endif
 		</ul>
 	</div>
 	<!--initiate accordion-->

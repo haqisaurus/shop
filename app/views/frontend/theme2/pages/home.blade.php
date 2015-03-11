@@ -6,6 +6,12 @@
 
 
 @section('content')
+
+@if ($data['products']->count())
+    @foreach ($data['products'] as $product)
+    {{ $product->name }}
+  @endforeach
+@endif
 <div class="shoes-grid">
 	<a href="single.html">
 		<div class="wrap-in">

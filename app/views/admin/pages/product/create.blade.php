@@ -102,6 +102,7 @@
                                 </div>
                             </div>
 
+
                             <div class="form-group @if ($errors->has('supplier')) has-error @endif">
                                 <label for="supplier" class="col-sm-2 control-label">Supplier</label>
                                 <div class="col-sm-4">
@@ -116,6 +117,13 @@
                                 </div>
                             </div>
 
+                            <div class="form-group @if ($errors->has('featured')) has-error @endif">
+                                <label for="featured" class="col-sm-2 control-label">featured</label>
+                                <div class="col-sm-3">
+                                    {{ Form::checkbox('featured', true) }}
+                                </div>
+                            </div>
+                            
                             <div class="form-group">
                                 <div class="col-sm-offset-2 col-sm-10">
                                     <button type="submit" class="btn btn-primay">Save and next</button>

@@ -11,6 +11,10 @@
 |
 */
 
+/** ------------------------------------------
+ *  Frontend Routes
+ *  ------------------------------------------
+ */
 Route::get('/', array('uses' => 'PagesController@index'));
 Route::get('products', array('uses' => 'PagesController@product'));
 Route::get('login', array('uses' => 'PagesController@login'));
@@ -23,6 +27,10 @@ Route::get('sale', array('uses' => 'PagesController@sale'));
 
 // Route::post('login', array('uses' => 'UserController@doLogin'));
 
+/** ------------------------------------------
+ *  Admin Routes
+ *  ------------------------------------------
+ */
 Route::get('_admin', array('uses' => 'UserController@showAdminLogin'));
 Route::post('_admin', array('uses' => 'UserController@doLoginAdmin'));
 

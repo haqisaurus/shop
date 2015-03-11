@@ -72,6 +72,7 @@ class ProductController extends \BaseController {
 		$price = Input::get('price');
 		$quantity = Input::get('quantity');
 		$supplier = Input::get('supplier');
+		$featured = Input::get('featured');
 
 		$validator = Validator::make(Input::all(), $rules);
 		
@@ -92,6 +93,7 @@ class ProductController extends \BaseController {
 			$product->quantity = $quantity;
 			$product->supplier_id = $supplier;
 			$product->user_id = 0;
+			$product->featured = $featured ? 1 : 0;
 			// $product->user_id = Auth::user()->id;
 
 			$result = $product->save();
