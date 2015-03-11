@@ -1,6 +1,8 @@
 $(function () {
     //BEGIN MENU SIDEBAR
+    var height = $(document).height() + (48 *2);
     $('#sidebar').css('min-height', '100%');
+    $('#sidebar').css('height', height);
     $('#side-menu').metisMenu();
 
     $(window).bind("load resize", function () {

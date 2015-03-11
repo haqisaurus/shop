@@ -9,7 +9,7 @@ class PagesController extends \BaseController {
 	{
 		$data = $this->commonData();
 		$data['new_product'] =  Product::orderBy('id', 'DESC')->paginate(6);
-		$data['featured_product'] = Product::orderBy('id', 'DESC')->paginate(2);
+		$data['featured_product'] = Product::where('featured', '=', 1)->orderBy('id', 'DESC')->get();
 
 		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.home')->with('data', $data);
 

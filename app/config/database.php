@@ -54,9 +54,9 @@ return array(
 
 		'mysql' => array(
 			'driver'    => 'mysql',
-			'host'      => 'localhost',
-			'database'  => 'laravel',
-			'username'  => 'root',
+			'host'      => 'db4free.net',
+			'database'  => 'belanjashop',
+			'username'  => 'belanjashop',
 			'password'  => 'tekanenter',
 			'charset'   => 'utf8',
 			'collation' => 'utf8_unicode_ci',

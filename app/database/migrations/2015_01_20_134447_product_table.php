@@ -15,10 +15,12 @@ class ProductTable extends Migration {
 		Schema::create('product', function(Blueprint $table)
 		{
 			$table->increments('id');
+			$table->string('SKU');
 			$table->string('name');
 			$table->longText('description');
 			$table->integer('status');
 			$table->string('price');
+			$table->string('price_promo');
 			$table->integer('quantity');
 			$table->decimal('discount', 5, 2);
 			$table->boolean('featured');

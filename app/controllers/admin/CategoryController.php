@@ -30,7 +30,7 @@ class CategoryController extends \BaseController {
 	{
 
 		$categories = Category::all();
-
+		$options[0] = "--= No parent =--";
 		foreach ($categories as $key => $value) {
 			$options[$value->id] = $value->name;
 		}
@@ -115,7 +115,7 @@ class CategoryController extends \BaseController {
 	public function edit($id)
 	{
 		$categories = Category::all();
-
+		$options[0] = "--= No parent =--";
 		foreach ($categories as $key => $value) {
 			if ($id!=$value->id) {
 				$options[$value->id] = $value->name;

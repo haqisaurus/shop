@@ -22,10 +22,13 @@
         {{HTML::style('admin/styles/zabuto_calendar.min.css')}}
         {{HTML::style('admin/styles/pace.css')}}
         {{HTML::style('admin/styles/jquery.news-ticker.css')}}    
+        {{-- {{HTML::style('admin/styles/style.css')}} --}}
+
     </head>
     <body>
+        <input type="hidden" id="SITE_URL" value="{{ URL::to('/') }}">
+        <input type="hidden" id="BASE_URL" value="{{ asset('/') }}">
         <div>
-            
             <!--BEGIN BACK TO TOP-->
             <a id="totop" href="#"><i class="fa fa-angle-up"></i></a>
             <!--END BACK TO TOP-->
@@ -48,14 +51,8 @@
                     
                     @yield('content', 'Default content')
 
-
-                    <!--BEGIN FOOTER-->
-                    <div id="footer">
-                        <div class="copyright">
-                            <a href="http://themifycloud.com">2014 © KAdmin Responsive Multi-Purpose Template</a>
-                        </div>
-                    </div>
-                    <!--END FOOTER-->
+                    @include('admin.includes.inc-footer')
+                    
                 </div>
                 <!--END PAGE WRAPPER-->
             </div>
@@ -84,31 +81,33 @@
         {{HTML::script('admin/script/jquery.cookie.js')}}
         {{HTML::script('admin/script/icheck.min.js')}}
         {{HTML::script('admin/script/custom.min.js')}}
-        {{HTML::script('admin/script/jquery.news-ticker.js')}}
+        {{-- {{HTML::script('admin/script/jquery.news-ticker.js')}} --}}
         {{HTML::script('admin/script/jquery.menu.js')}}
         {{HTML::script('admin/script/pace.min.js')}}
         {{HTML::script('admin/script/holder.js')}}
         {{HTML::script('admin/script/responsive-tabs.js')}}
-        {{HTML::script('admin/script/jquery.flot.js')}}
+       {{--  {{HTML::script('admin/script/jquery.flot.js')}}
         {{HTML::script('admin/script/jquery.flot.categories.js')}}
         {{HTML::script('admin/script/jquery.flot.pie.js')}}
         {{HTML::script('admin/script/jquery.flot.tooltip.js')}}
         {{HTML::script('admin/script/jquery.flot.resize.js')}}
         {{HTML::script('admin/script/jquery.flot.fillbetween.js')}}
         {{HTML::script('admin/script/jquery.flot.stack.js')}}
-        {{HTML::script('admin/script/jquery.flot.spline.js')}}
-        {{HTML::script('admin/script/zabuto_calendar.min.js')}}
-        {{HTML::script('admin/script/index.js')}}
+        {{HTML::script('admin/script/jquery.flot.spline.js')}} --}}
+        {{-- {{HTML::script('admin/script/zabuto_calendar.min.js')}} --}}
+        {{-- {{HTML::script('admin/script/index.js')}} --}}
         <!--LOADING SCRIPTS FOR CHARTS-->
-        {{HTML::script('admin/script/highcharts.js')}}
+     {{--    {{HTML::script('admin/script/highcharts.js')}}
         {{HTML::script('admin/script/data.js')}}
         {{HTML::script('admin/script/drilldown.js')}}
         {{HTML::script('admin/script/exporting.js')}}
         {{HTML::script('admin/script/highcharts-more.js')}}
         {{HTML::script('admin/script/charts-highchart-pie.js')}}
-        {{HTML::script('admin/script/charts-highchart-more.js')}}
+        {{HTML::script('admin/script/charts-highchart-more.js')}} --}}
         <!--CORE JAVASCRIPT-->
         {{HTML::script('admin/script/main.js')}}
+        {{HTML::script('admin/script/jquery.fileupload.js')}}
+        {{HTML::script('admin/script/engine.js')}}
         <script>        (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
             i[r] = i[r] || function () {

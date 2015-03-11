@@ -3,8 +3,8 @@
 		<div class="container">
 			<div class="top-header-left">
 				<ul class="support">
-					<li><a href="#"><label> </label></a></li>
-					<li><a href="#">24x7 live<span class="live"> support</span></a></li>
+					<li><a href="{{ URL::to('contact-us') }}"><label> </label></a></li>
+					<li><a href="{{ URL::to('contact-us') }}">24x7 live<span class="live"> support</span></a></li>
 				</ul>
 				<ul class="support">
 					<li class="van"><a href="#"><label> </label></a></li>
@@ -38,7 +38,7 @@
 		<div class="container">
 			<div class="header-bottom-left">
 				<div class="logo">
-					<a href="index.html">
+					<a href="{{ url('/') }}">
 						{{ HTML::image("assets/theme2/images/logo.png", "Logo", array('class' => "")) }}
 					</a>
 				</div>
@@ -49,13 +49,13 @@
 				<div class="clearfix"> </div>
 			</div>
 			<div class="header-bottom-right">
-				<div class="account"><a href="login.html"><span> </span>YOUR ACCOUNT</a></div>
+				<div class="account"><a href="{{ url('account') }}"><span> </span>YOUR ACCOUNT</a></div>
 				<ul class="login">
-					<li><a href="login.html"><span> </span>LOGIN</a></li>
+					<li><a href="{{ url('login') }}"><span> </span>LOGIN</a></li>
 					|
-					<li ><a href="register.html">SIGNUP</a></li>
+					<li ><a href="{{ url('register') }}">SIGNUP</a></li>
 				</ul>
-				<div class="cart"><a href="#"><span> </span>CART</a></div>
+				<div class="cart"><a href="{{ url('cart') }}"><span> </span>CART</a></div>
 				<div class="clearfix"> </div>
 			</div>
 			<div class="clearfix"> </div>

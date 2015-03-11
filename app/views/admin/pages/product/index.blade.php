@@ -64,11 +64,13 @@
                         <thead>
                             <th><input type="checkbox" id="checkall" /></th>
                             <th>Name</th>
+                            <th>Preview</th>
                             <th>Price</th>
                             <th>Stock</th>
                             <th>Status</th>
                             <th>Supplier</th>
                             <th>Discount</th>
+                            <th>Featured</th>
                             <th>Actions</th>
                         </thead>
                         <tbody>
@@ -77,11 +79,13 @@
                             <tr id="row-{{ $product->id }}">
                                 <td><input type="checkbox" name="selected-rows[]" class="checkthis" value="{{ $product->id }}"></td>
                                 <td>{{ $product->name }}</td>
+                                <td>{{ isset($product->media[0]) ? HTML::image( asset($product->media[0]->url) , "preview", array('class' => "table-preview")) : '' }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>{{ $product->status }}</td>
                                 <td>{{ $product->supplier->name }}</td>
                                 <td>{{ $product->discount }}</td>
+                                <td>{{ $product->featured }}</td>
                                 <td>
                                     {{ Form::open(array('url' => 'product/'. $product->id . '/edit', 'class' => 'inline')) }}
                                     {{ Form::hidden('_method', 'GET') }}

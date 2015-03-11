@@ -65,7 +65,7 @@
 
                         <div role="tabpanel" class="tab-pane active" id="images">
                             <br>
-                                {{ Form::hidden('product_id', $productId, array('id' => 'product_id')) }}
+                            {{ Form::hidden('product_id', $productId, array('id' => 'product_id')) }}
                             <div class="row">
                                 <div class="col-md-12">
                                     <label for="fileupload" class="btn btn-success">

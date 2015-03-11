@@ -7,7 +7,7 @@
 			    
 				@if ($category->level == 0)
 				<li class="item1">
-					<a href="{{ url('products') }}">
+					<a href="{{ URL::to('products') }}">
 						@if ($category->childs->count() > 0)
 							{{ HTML::image("assets/theme2/images/arrow1.png", "Logo", array('class' => "")) }}
 						@endif
@@ -17,7 +17,7 @@
 					@if ($category->childs->count() > 0)
 					<ul class="cute">
 			    		@foreach ($category->childs as $childCategory)
-						<li class="subitem1"><a href="{{ url('products') }}">{{ $childCategory->name }} </a></li>
+						<li class="subitem1"><a href="{{ URL::to('product/create') }}">{{ $childCategory->name }} </a></li>
 						@endforeach
 					</ul>
 					@endif
@@ -34,7 +34,9 @@
 		menu_a  = $('.menu > li > a');
 		menu_ul.hide();
 		menu_a.click(function(e) {
-			e.preventDefault();
+			
+			if($(this).siblings('.cute').length) e.preventDefault();
+			
 			if(!$(this).hasClass('active')) {
 				menu_a.removeClass('active');
 				menu_ul.filter(':visible').slideUp('normal');

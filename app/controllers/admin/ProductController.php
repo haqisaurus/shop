@@ -70,6 +70,7 @@ class ProductController extends \BaseController {
 		$description = Input::get('description');
 		$category = Input::get('category');
 		$price = Input::get('price');
+		$promo = Input::get('promo');
 		$quantity = Input::get('quantity');
 		$supplier = Input::get('supplier');
 		$featured = Input::get('featured');
@@ -90,6 +91,7 @@ class ProductController extends \BaseController {
 			$product->status = $status;
 			$product->category_id = $category;
 			$product->price = $price;
+			$product->price_promo = $promo;
 			$product->quantity = $quantity;
 			$product->supplier_id = $supplier;
 			$product->user_id = 0;
