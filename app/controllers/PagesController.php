@@ -18,7 +18,9 @@ class PagesController extends \BaseController {
 
 	public function product()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.products');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.products')->with('data', $data);
 
 		return $this->layout;
 	}
@@ -26,42 +28,55 @@ class PagesController extends \BaseController {
 
 	public function detail()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.detail');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.detail')->with('data', $data);
 
 		return $this->layout;
 	}
 
 	public function cart()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.cart');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.cart')->with('data', $data);
 
 		return $this->layout;
 	}
 
 	public function checkout()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.checkout');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.checkout')->with('data', $data);
 
 		return $this->layout;
 	}
 
 	public function contact()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.contact');
+
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.contact')->with('data', $data);
 
 		return $this->layout;
 	}
 
 	public function login()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.login');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.login')->with('data', $data);
 
 		return $this->layout;
 	}
 
 	public function register()
 	{
-		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.register');
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.register')->with('data', $data);
 
 		return $this->layout;
 	}
