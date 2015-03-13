@@ -11,7 +11,7 @@ class ProductController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::all();
+		$products = Product::orderBy('id', 'DESC')->paginate(6);
 		$listData['products'] = $products;
 		
 		$this->layout->content = View::make('admin.pages.product.index')->with('listData', $listData);
@@ -28,8 +28,8 @@ class ProductController extends \BaseController {
 	 */
 	public function create()
 	{
-		$depend['suppliers'] = array();
-		$depend['categories'] = array();
+		$depend['suppliers'] = array('-');
+		$depend['categories'] = array('-');
 
 		foreach (Supplier::all() as $key => $value) {
 			$depend['suppliers'][$value->id] = $value->name;
@@ -57,13 +57,13 @@ class ProductController extends \BaseController {
 
 		$rules = array(
 		    'name'    		=> 'required', 
+		    'image' 		=> 'required',
 		    'status' 		=> 'required',
-		    'description' 	=> 'required',
+		    // 'description' 	=> 'required',
 		    'category' 		=> 'required',
 		   	'price'			=> 'required',
 		    'quantity' 		=> 'required',
 		    'supplier' 		=> 'required',
-		    'image' 		=> 'required',
 		);
 
 		$name = Input::get('name');
@@ -124,7 +124,8 @@ class ProductController extends \BaseController {
 
 	public function createFiles($id)
 	{
-		$this->layout->content = View::make('admin.pages.product.create-media')->with('productId', $id);
+		$media = Media::where('product_id', $id)->get();
+		$this->layout->content = View::make('admin.pages.product.create-media')->with('productId', $id)->with('media', $media);
 		return $this->layout;
 	}
 

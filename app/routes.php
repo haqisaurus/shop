@@ -19,7 +19,7 @@ Route::get('/', array('uses' => 'PagesController@index'));
 Route::get('products', array('uses' => 'PagesController@product'));
 Route::get('login', array('uses' => 'PagesController@login'));
 Route::get('register', array('uses' => 'PagesController@register'));
-Route::get('detail', array('uses' => 'PagesController@detail'));
+Route::get('detail/{id}', array('uses' => 'PagesController@detail'));
 Route::get('contact', array('uses' => 'PagesController@contact'));
 Route::get('sale', array('uses' => 'PagesController@sale'));
 

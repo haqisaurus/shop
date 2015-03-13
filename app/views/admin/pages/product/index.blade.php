@@ -78,13 +78,12 @@
                             @foreach ($listData['products'] as $product)
                             <tr id="row-{{ $product->id }}">
                                 <td><input type="checkbox" name="selected-rows[]" class="checkthis" value="{{ $product->id }}"></td>
-
-                                {{-- <td>{{ isset($product->media) ? HTML::image( asset($product->media->where('default', 1)->get()) , "preview", array('class' => "table-preview")) : '' }}</td> --}}
+                                <td>{{ $product->name }}</td>
                                 <td>{{ count($product->media()->get()) ?  HTML::image( asset($product->media()->where('default', 1)->get()->first()->url) , "preview", array('class' => "table-preview")) : 'No preview' }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>{{ $product->status }}</td>
-                                <td>{{ $product->supplier->name }}</td>
+                                <td>{{ $product->supplier->name or '' }}</td>
                                 <td>{{ $product->discount }}</td>
                                 <td>{{ $product->featured }}</td>
                                 <td>
