@@ -70,7 +70,7 @@ $('#delete-selected-popup')
 
 $("[data-toggle=tooltip]").tooltip();
 
-var indexUpload = 1,
+var indexUpload = $('#media-progress tr').length,
     href = window.location.href,
     index =href.substr(href.lastIndexOf('/') + 1);
 
@@ -81,7 +81,7 @@ $('#fileupload').fileupload({
     formData: { data : index},
     done: function (e, data) {
         if (data.result.status) {
-            $('#media-progress').find('tr').eq(indexUpload).find('.right').html('<i class="fa fa-check-circle-o"></i>');
+            $('#media-progress').find('tr').eq(indexUpload).find('.right').html($('<img/>', { 'class' : 'image-status'}).attr('src', BASE_URL + 'admin/images/icons/done.png'));
         } else {
             $('#media-progress').find('tr').eq(indexUpload).find('.right').html('<i class="fa fa-times-circle-o"></i>');
         }
@@ -98,7 +98,7 @@ $('#fileupload').fileupload({
             length = parent.find('tr').length,
             tr = $('<tr/>', { 'class' : 'row-' + length }),
             td = $('<td/>'),
-            img = $('<img/>', { 'class' : 'image-preview'}),
+            img = $('<img/>', { 'class' : 'image-preview table-preview'}),
             progress = $('<div/>', { 'class' : 'progress'}),
             bar = $('<div/>', { 'class' : 'progress-bar bar-' + length, 'role' : 'progressbar', 'aria-valuenow' : 0, 'aria-valuemin' : 0, 'aria-valuemax' : '100' });
         
@@ -106,7 +106,7 @@ $('#fileupload').fileupload({
             $('<td/>', { 'class' : ''}).append(length), 
             $('<td/>', { 'class' : 'left'}).append(img), 
             $('<td/>', { 'class' : 'center'}).append(progress.append(bar)),
-            $('<td/>', { 'class' : 'right'}).append($('<img/>', { 'class' : 'image-status'}).attr('src', BASE_URL + 'assets/admin/img/loader.gif'))
+            $('<td/>', { 'class' : 'right'}).append($('<img/>', { 'class' : 'image-status'}).attr('src', BASE_URL + 'admin/images/icons/loader.gif'))
             ]));
 
         var percent = parseInt(data.loaded / data.total * 100, 10);

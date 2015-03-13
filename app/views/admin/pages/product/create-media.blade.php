@@ -85,6 +85,16 @@
                                             <th>Progress</th>
                                             <th>Status</th>
                                         </tr>
+                                        @if ($media->count())
+                                        @foreach ($media as $key => $file)
+                                        <tr>
+                                            <td>{{ $key + 1 }}</td>
+                                            <td>{{ HTML::image(asset($file->url), "preview", array('class' => "table-preview")) }}</td>
+                                            <td></td>
+                                            <td>Uploaded</td>
+                                        </tr>
+                                        @endforeach
+                                        @endif
                                     </table>
                                 </div>
                             </div>

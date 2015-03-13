@@ -8,7 +8,7 @@ class PagesController extends \BaseController {
 	public function index()
 	{
 		$data = $this->commonData();
-		$data['new_product'] =  Product::orderBy('id', 'DESC')->paginate(6);
+		$data['new_products'] =  Product::orderBy('id', 'DESC')->paginate(6);
 		$data['featured_product'] = Product::where('featured', '=', 1)->orderBy('id', 'DESC')->get();
 
 		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.home')->with('data', $data);
@@ -19,6 +19,7 @@ class PagesController extends \BaseController {
 	public function product()
 	{
 		$data = $this->commonData();
+		$data['new_products'] =  Product::orderBy('id', 'DESC')->paginate(6);
 
 		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.products')->with('data', $data);
 
@@ -26,9 +27,10 @@ class PagesController extends \BaseController {
 	}
 
 
-	public function detail()
+	public function detail($id = null)
 	{
 		$data = $this->commonData();
+		$data['product_detail'] = Product::find($id);
 
 		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.detail')->with('data', $data);
 
