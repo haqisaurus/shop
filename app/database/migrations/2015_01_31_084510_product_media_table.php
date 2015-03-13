@@ -17,6 +17,7 @@ class ProductMediaTable extends Migration {
 			$table->increments('id');
 			$table->string('name');
 			$table->longText('description');
+			$table->boolean('default');
 			$table->integer('product_id');
 			$table->string('url');
 

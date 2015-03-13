@@ -11,7 +11,7 @@ class ProductController extends \BaseController {
 	 */
 	public function index()
 	{
-		$products = Product::orderBy('id', 'DESC')->paginate(10);
+		$products = Product::all();
 		$listData['products'] = $products;
 		
 		$this->layout->content = View::make('admin.pages.product.index')->with('listData', $listData);
@@ -63,6 +63,7 @@ class ProductController extends \BaseController {
 		   	'price'			=> 'required',
 		    'quantity' 		=> 'required',
 		    'supplier' 		=> 'required',
+		    'image' 		=> 'required',
 		);
 
 		$name = Input::get('name');
@@ -74,6 +75,7 @@ class ProductController extends \BaseController {
 		$quantity = Input::get('quantity');
 		$supplier = Input::get('supplier');
 		$featured = Input::get('featured');
+		$file = Input::file('image');
 
 		$validator = Validator::make(Input::all(), $rules);
 		
@@ -100,6 +102,17 @@ class ProductController extends \BaseController {
 
 			$result = $product->save();
 
+			if (Input::hasFile('image'))
+			{
+				$filename = str_random(12) . '.' . $file->getClientOriginalExtension();
+				$uploadResult = $file->move('uploads/product-media/' . $product->id, $filename);
+
+				$media = new Media;
+				$media->default = 1;
+				$media->url = $uploadResult->getPathName();
+				$media->product_id = $product->id;
+				$result = $media->save();
+			}
 			if ($result) {
 				return Redirect::to('product/files/' . $product->id); 
 			} else {
@@ -264,6 +277,7 @@ class ProductController extends \BaseController {
 			$media = new Media;
 			$media->url = $uploadResult->getPathName();
 			$media->product_id = $id;
+			$media->default = 0;
 			
 			$result = $media->save();
 

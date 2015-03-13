@@ -57,11 +57,18 @@
                 <div class="tab-content">
                     <div role="tabpanel" class="tab-pane active" id="main">
                         <br>
-                        {{ Form::open(array('url' => 'product', 'class' => 'form-horizontal')) }}
+                        {{ Form::open(array('url' => 'product', 'class' => 'form-horizontal', 'files' => true)) }}
                         <div class="form-group @if ($errors->has('name')) has-error @endif">
                             <label for="name" class="col-sm-2 control-label">Product name</label>
                             <div class="col-sm-10">
                                 {{ Form::text('name', Input::old('name'), array('id' => 'name', 'class' => 'form-control', 'placeholder' => 'Name')) }}
+                            </div>
+                        </div>
+
+                        <div class="form-group @if ($errors->has('image')) has-error @endif">
+                            <label for="image" class="col-sm-2 control-label">Product image</label>
+                            <div class="col-sm-10">
+                                {{ Form::file('image', array('id' => 'image', 'class' => '')) }}
                             </div>
                         </div>
 

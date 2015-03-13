@@ -78,8 +78,9 @@
                             @foreach ($listData['products'] as $product)
                             <tr id="row-{{ $product->id }}">
                                 <td><input type="checkbox" name="selected-rows[]" class="checkthis" value="{{ $product->id }}"></td>
-                                <td>{{ $product->name }}</td>
-                                <td>{{ isset($product->media[0]) ? HTML::image( asset($product->media[0]->url) , "preview", array('class' => "table-preview")) : '' }}</td>
+
+                                {{-- <td>{{ isset($product->media) ? HTML::image( asset($product->media->where('default', 1)->get()) , "preview", array('class' => "table-preview")) : '' }}</td> --}}
+                                <td>{{ count($product->media()->get()) ?  HTML::image( asset($product->media()->where('default', 1)->get()->first()->url) , "preview", array('class' => "table-preview")) : 'No preview' }}</td>
                                 <td>{{ $product->price }}</td>
                                 <td>{{ $product->quantity }}</td>
                                 <td>{{ $product->status }}</td>
@@ -107,7 +108,7 @@
                         @if(isset($listData['query']))
                         {{ $listData['products']->appends(array('query' => $listData['query']))->links() }}
                         @else
-                        {{ $listData['products']->links() }}
+                        {{-- {{ $listData['products']->links() }} --}}
                         @endif
                     </ul>
                 </div>
