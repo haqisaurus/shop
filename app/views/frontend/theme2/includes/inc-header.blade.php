@@ -55,7 +55,7 @@
 					|
 					<li ><a href="{{ url('register') }}">SIGNUP</a></li>
 				</ul>
-				<div class="cart"><a href="{{ url('cart') }}"><span> </span>CART</a></div>
+				<div class="cart"><a href="{{ url('cart') }}"><span> </span>CART ({{count($cart)}})</a></div>
 				<div class="clearfix"> </div>
 			</div>
 			<div class="clearfix"> </div>

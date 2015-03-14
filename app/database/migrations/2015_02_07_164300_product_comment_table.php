@@ -31,7 +31,7 @@ class ProductCommentTable extends Migration {
 	 */
 	public function down()
 	{
-		Schema::drop('product_supplier');
+		Schema::drop('product_comment');
 	}
 
 }

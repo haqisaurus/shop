@@ -21,7 +21,7 @@ class ProductTable extends Migration {
 			$table->integer('status');
 			$table->string('price');
 			$table->string('price_promo');
-			$table->integer('quantity');
+			$table->integer('stock');
 			$table->decimal('discount', 5, 2);
 			$table->boolean('featured');
 			$table->integer('category_id');

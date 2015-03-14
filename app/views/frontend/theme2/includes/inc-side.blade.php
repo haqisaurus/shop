@@ -49,15 +49,17 @@
 
 	});
 	</script>
+	@if($data['random_product']->count())
 	<div class=" chain-grid menu-chain">
-		<a href="single.html">
-			{{ HTML::image("assets/theme2/images/wat.jpg", "Logo", array('class' => "img-responsive chain")) }}
+		<a href="{{ URL::to('detail/' . $data['random_product']->id) }}">
+			{{ HTML::image(asset($data['random_product']->media()->where('default',1)->first()->url), "Preview", array('class' => "img-responsive chain")) }}
 		</a>	   		     		
 		<div class="grid-chain-bottom chain-watch">
-			<span class="actual dolor-left-grid">300$</span>
-			<span class="reducedfrom">500$</span>  
-			<h6><a href="single.html">Lorem ipsum dolor</a></h6>
+			<span class="actual dolor-left-grid">Rp. {{ $data['random_product']->price }}</span>
+			<span class="reducedfrom">Rp. {{ $data['random_product']->price }}</span>  
+			<h6><a href="{{ URL::to('detail/' . $data['random_product']->id) }}">{{ $data['random_product']->name }}</a></h6>
 		</div>
 	</div>
-	<a class="view-all all-product" href="product.html">VIEW ALL PRODUCTS<span> </span></a> 	
+	@endif
+	<a class="view-all all-product" href="{{ URL::to('products') }}">VIEW ALL PRODUCTS<span> </span></a> 	
 </div>

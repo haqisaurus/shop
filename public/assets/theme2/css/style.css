@@ -540,7 +540,7 @@ span.dolor-left-grid{
 	margin: 0 0em 0em 3em;	
 }
 .single_top {
-	margin:3em 0;
+	margin: 2em 0;
 }
 .toogle {
 	margin-top: 4%;
@@ -903,7 +903,7 @@ a.forgot {
 	display: block;
 	text-transform: uppercase;
 }
-.register-top-grid input[type="text"], .register-bottom-grid input[type="text"] {
+.register-top-grid input[type="text"], .register-bottom-grid input[type="text"], .register-bottom-grid input[type="password"] {
 	border: 1px solid #EEE;
 	outline-color:#FF5B36;
 	width: 85%;
@@ -1724,3 +1724,10 @@ select.in-drop {
 	}
 }
 
+.error-input {
+	border: 1px solid red!important;
+}
+
+.error-block {
+	color: red;
+}

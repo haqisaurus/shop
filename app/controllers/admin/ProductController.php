@@ -72,7 +72,7 @@ class ProductController extends \BaseController {
 		$category = Input::get('category');
 		$price = Input::get('price');
 		$promo = Input::get('promo');
-		$quantity = Input::get('quantity');
+		$stock = Input::get('quantity');
 		$supplier = Input::get('supplier');
 		$featured = Input::get('featured');
 		$file = Input::file('image');
@@ -94,7 +94,7 @@ class ProductController extends \BaseController {
 			$product->category_id = $category;
 			$product->price = $price;
 			$product->price_promo = $promo;
-			$product->quantity = $quantity;
+			$product->stock = $stock;
 			$product->supplier_id = $supplier;
 			$product->user_id = 0;
 			$product->featured = $featured ? 1 : 0;

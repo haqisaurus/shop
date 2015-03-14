@@ -21,7 +21,18 @@ Route::get('login', array('uses' => 'PagesController@login'));
 Route::get('register', array('uses' => 'PagesController@register'));
 Route::get('detail/{id}', array('uses' => 'PagesController@detail'));
 Route::get('contact', array('uses' => 'PagesController@contact'));
-Route::get('sale', array('uses' => 'PagesController@sale'));
+Route::get('cart', array('uses' => 'PagesController@cart'));
+Route::get('checkout', array('uses' => 'PagesController@checkout'));
+Route::get('account', array('uses' => 'PagesController@account'));
+
+/** ------------------------------------------
+ *  Frontend Order Actions Routes
+ *  ------------------------------------------
+ */
+Route::post('register', array('uses' => 'ActionController@register'));
+Route::post('addToCart', array('uses' => 'ActionController@addToCart'));
+Route::get('removeCart/{id}', array('uses' => 'ActionController@removeCart'));
+Route::post('updateAccount/{id}', array('as' => 'updateAccount', 'uses' => 'ActionController@updateAccount'));
 
 // Route::get('login', array('uses' => 'UserController@showLogin'));
 

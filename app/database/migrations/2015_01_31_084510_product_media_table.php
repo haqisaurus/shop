@@ -20,6 +20,7 @@ class ProductMediaTable extends Migration {
 			$table->boolean('default');
 			$table->integer('product_id');
 			$table->string('url');
+			$table->string('thumbnail');
 
 			$table->timestamps();
 		});

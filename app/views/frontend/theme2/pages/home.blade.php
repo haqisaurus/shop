@@ -6,35 +6,33 @@
 
 
 @section('content')
-
 <div class="shoes-grid">
-    <a href="single.html"></a>
     <div class="wrap-in">
         <div class="wmuSlider example1 slide-grid">
             <div class="wmuSliderWrapper">
-                @if ($data['featured_product']->count()) @foreach
-                ($data['featured_product'] as $featuredProduct)
-                <div class="banner-matter">
-                    <div class="col-md-5 banner-bag">
-                        {{
-                        HTML::image(asset($featuredProduct->media()->where('default',
-                        1)->get()->first()->url), "Logo",
-                        array('class' => "img-responsive")) }}
-                    </div>
-                    <div class="col-md-7 banner-off">
-                        <h2>
-                            FLAT 50% 0FF
-                        </h2>
-                        <label>FOR ALL PURCHASE
-                        <strong>{{$featuredProduct->name}}</strong></label>
-                        <p>
-                            {{$featuredProduct->description}}
-                        </p>
-                        <span class="on-get">GET NOW</span>
-                    </div>
-                    <div class="clearfix"></div>
-                </div>
-                @endforeach @endif
+                @if ($data['featured_product']->count()) 
+                    @foreach ($data['featured_product'] as $featuredProduct)
+                    <a href="{{ URL::to('detail/' . $featuredProduct->id) }}">
+                        <div class="banner-matter">
+                            <div class="col-md-5 banner-bag">
+                                {{ HTML::image(asset($featuredProduct->media()->where('default', 1)->get()->first()->url), "Logo", array('class' => "img-responsive")) }}
+                            </div>
+                            <div class="col-md-7 banner-off">
+                                <h2>
+                                    FLAT 50% 0FF
+                                </h2>
+                                <label>FOR ALL PURCHASE
+                                <strong>{{$featuredProduct->name}}</strong></label>
+                                <p>
+                                    {{ Str::words($featuredProduct->description,10) }}
+                                </p>
+                                <span class="on-get">GET NOW</span>
+                            </div>
+                            <div class="clearfix"></div>
+                        </div>
+                    </a>
+                    @endforeach
+                @endif
             </div>
         </div>
     </div>
@@ -70,40 +68,39 @@
             LATEST PRODUCTS
         </h5>
         <a class="view-all" href=
-            "{{%20URL::to('products')%20}}">VIEW ALL</a>
+            "{{ URL::to('products') }}">VIEW ALL</a>
     </div>
     <div class="product-left">
         @if ($data['new_products']->count()) 
-        @foreach ($data['new_products'] as $product)
-        <div class="col-md-4 chain-grid">
-            <a href="single.html">{{
-            HTML::image(asset($product->media()->where('default',1)->get()->first()->url), "Logo", array('class' => "img-responsive chain")) }}</a>
-            <div class="grid-chain-bottom">
-                <h6>
-                    <a href="single.html">{{ $product->name }}</a>
-                </h6>
-                <div class="star-price">
-                    <div class="dolor-grid">
-                        <span class="actual">300$</span> <span class=
-                            "reducedfrom">400$</span> <span class=
-                            "rating"><input type="radio" class="rating-input" id=
-                            "rating-input-1-5" name="rating-input-1" />
-                        <input type="radio" class="rating-input" id=
-                            "rating-input-1-4" name="rating-input-1" />
-                        <input type="radio" class="rating-input" id=
-                            "rating-input-1-3" name="rating-input-1" />
-                        <input type="radio" class="rating-input" id=
-                            "rating-input-1-2" name="rating-input-1" />
-                        <input type="radio" class="rating-input" id=
-                            "rating-input-1-1" name="rating-input-1" /></span>
+            @foreach ($data['new_products'] as $product)
+            <div class="col-md-4 chain-grid">
+                <a href="{{ URL::to('detail/' . $product->id) }}">{{ HTML::image(asset($product->media()->where('default',1)->get()->first()->url), "Logo", array('class' => "img-responsive chain")) }}</a>
+                <div class="grid-chain-bottom">
+                    <h6>
+                        <a href="{{ URL::to('detail/' . $product->id) }}">{{ $product->name }}</a>
+                    </h6>
+                    <div class="star-price">
+                        <div class="dolor-grid">
+                            <span class="actual">300$</span> <span class=
+                                "reducedfrom">400$</span> <span class=
+                                "rating"><input type="radio" class="rating-input" id=
+                                "rating-input-1-5" name="rating-input-1" />
+                            <input type="radio" class="rating-input" id=
+                                "rating-input-1-4" name="rating-input-1" />
+                            <input type="radio" class="rating-input" id=
+                                "rating-input-1-3" name="rating-input-1" />
+                            <input type="radio" class="rating-input" id=
+                                "rating-input-1-2" name="rating-input-1" />
+                            <input type="radio" class="rating-input" id=
+                                "rating-input-1-1" name="rating-input-1" /></span>
+                        </div>
+                        <a class="now-get get-cart" href="#">ADD TO
+                        CART</a>
+                        <div class="clearfix"></div>
                     </div>
-                    <a class="now-get get-cart" href="#">ADD TO
-                    CART</a>
-                    <div class="clearfix"></div>
                 </div>
             </div>
-        </div>
-        @endforeach 
+            @endforeach 
         @endif
         <div class="clearfix"></div>
     </div>

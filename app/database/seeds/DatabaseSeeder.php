@@ -121,7 +121,7 @@ class SupplierTableSeeder extends Seeder {
 	        'name'     => 'Lotus',
 	        'description'  => 'Description',
 	        'address'    => 'Street',
-	        'path'    => '',
+	        'photo'    => '',
 	        )
 	    );
     }

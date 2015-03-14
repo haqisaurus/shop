@@ -48,20 +48,21 @@
         @foreach ($data['new_products'] as $product)
         <div class=" product-grid">
             <div class="content_box">
-                <a href="single.html"></a>
-                <div class="left-grid-view grid-view-left">
-                    {{ HTML::image(asset($product->media()->where('default',1)->get()->first()->url), "Product", array('class' => "img-responsive watch-right")) }}
-                    <div class="mask">
-                        <div class="info">
-                            Quick View
+                <a href="{{ URL::to('detail/' . $product->id) }}">
+                    <div class="left-grid-view grid-view-left">
+                        {{ HTML::image(asset($product->media()->where('default',1)->get()->first()->url), "Product", array('class' => "img-responsive watch-right")) }}
+                        <div class="mask">
+                            <div class="info">
+                                Quick View
+                            </div>
                         </div>
                     </div>
-                </div>
+                </a>
                 <h4>
                     <a href="{{ URL::to('detail/' . $product->id) }}">{{ $product->name }}</a>
                 </h4>
                 <p>
-                    {{ $product->description }}
+                    {{ Str::words($product->description, 12) }}
                 </p>
                 Rp. {{ $product->price }}
             </div>
@@ -237,6 +238,8 @@
             </div>
         </div>
         <div class="clearfix"></div>
+        {{ $data['new_products']->links() }}
+
     </div>
 </div>
 
