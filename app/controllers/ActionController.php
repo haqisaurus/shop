@@ -8,25 +8,78 @@ class ActionController extends \BaseController {
 	{
 		$productID = Input::get('productID');
 		$quantity = Input::get('quantity');
-		$cartData = array(
-						'product_id' => $productID,
-						'quantity' => $quantity,
-					);
-
-
-		if (Session::has('cart_session.' . $productID)) 
+		
+		if (Auth::check())
 		{
-			// Session::forget('cart_session.' . $productID);
-			Session::put('cart_session.' . $productID, $cartData);
-		} 
-		else 
+			$orderOld = Order::where('status', 0)->where('user_address_id', Auth::id())->first();
+			if ($orderOld) {
+				$detail = Orderdetail::where('order_id', $orderOld->id)->where('product_id', $productID)->first();
+				if ($detail) {
+					$detail->product_id = $productID;
+					$detail->quantity = $quantity;
+					$detail->save();
+				} else {
+					$detail = new Orderdetail;
+					$detail->product_id = $productID;
+					$detail->quantity = $quantity;
+					$detail->save();
+
+					$orderOld->detail()->save($detail);
+					$orderOld->save();
+				}
+			} 
+			else
+			{
+				$order = new Order;
+				$order->status =  0;
+				$order->user_address_id = Auth::id();
+				$order->save();
+
+				$detail = new Orderdetail;
+				$detail->product_id = $productID;
+				$detail->quantity = $quantity;
+				$detail->save();
+
+				$order->detail()->save($detail);
+			}
+		}
+		else
 		{
+			$cartData = array(
+							'product_id' => $productID,
+							'quantity' => $quantity,
+						);
+
 			Session::put('cart_session.' . $productID, $cartData);
+			
 		}
 
-		Session::flash('cart_message', 'Pesanan anda telah masuk ke keranjang belanja...');
-				
-		return Redirect::to(Session::get('last_url'));
+		return Redirect::to(Session::get('last_url'))->with('cart_message', 'Pesanan anda telah masuk ke keranjang belanja...');
+	}
+
+	public function addCartToDB($cartData = array())
+	{
+
+		$order = Order::where('status', 0)->where('user_address_id', Auth::id())->first();
+		
+		if (!$order) {
+			$order = new Order;
+			$order->status = 0;
+			$order->user_address_id = Auth::id();
+			$order->save();
+		}
+		
+		if ($cartData) {
+			foreach ($cartData as $data) {
+
+				$detail = new Orderdetail;
+				$detail->product_id = $data['product_id'];
+				$detail->quantity = $data['quantity'];
+				$detail->save();
+
+				$order->detail()->save($detail);
+			}
+		}
 
 	}
 
@@ -74,6 +127,7 @@ class ActionController extends \BaseController {
 			$result = $user->save();
 
 			if ($result && Auth::loginUsingId($user->id)) {
+				$this->addCartToDB(Session::get('cart_session'));
 				return Redirect::to('account'); 
 			} else {
 				return Redirect::to('register')>withInput(); 
@@ -128,5 +182,98 @@ class ActionController extends \BaseController {
 			}
 		}
 	}
+	
+	########################### AUTHENTICATION #############################
+	
+	public function showLogin()
+	{
+		
+		return View::make('admin.layout.login');
+	}
 
+	public function doLogin()
+	{
+		// validate the info, create rules for the inputs
+		$rules = array(
+		    'email'    => 'required', // make sure the email is an actual email
+		    'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+		);
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all(), $rules);
+
+		// if the validator fails, redirect back to the form
+		if ($validator->fails()) {
+		    return Redirect::to('login')
+		        ->withErrors($validator) // send back all errors to the login form
+		        ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+		} else {
+
+			// check is not admin
+
+		    $userdata = array(
+		        'email'     => Input::get('email'),
+		        'password'  => Input::get('password'),
+		    );
+
+		    if (Auth::attempt($userdata)) {
+				$this->addCartToDB(Session::get('cart_session'));
+		        return Redirect::to('account');
+		    } else {        
+		    	return Redirect::to('login')
+		    			->with('msg', 'User and password does not match...')
+            			->withInput(Input::except('password')); 	
+		    }
+
+		}
+	}
+
+	public function showLoginAdmin()
+	{
+		return View::make('admin.layouts.login');
+	}
+
+	public function doLoginAdmin()
+	{
+		// validate the info, create rules for the inputs
+		$rules = array(
+		    'email'    => 'required', // make sure the email is an actual email
+		    'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
+		);
+
+		// run the validation rules on the inputs from the form
+		$validator = Validator::make(Input::all(), $rules);
+
+		// if the validator fails, redirect back to the form
+		if ($validator->fails()) {
+		    return Redirect::to('_login')
+		        ->withErrors($validator) // send back all errors to the login form
+		        ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
+		} else {
+
+			// check is not admin
+
+		    $userdata = array(
+		    	'role_id' => 1,
+		        'email'     => Input::get('email'),
+		        'password'  => Input::get('password'),
+		    );
+
+		    if (Auth::attempt($userdata)) {
+		        return Redirect::to('dashboard');
+		    } else {        
+		    	return Redirect::to('_login')
+		    			->with('msg', 'User not found...')
+            			->withInput(Input::except('password')); 	
+		    }
+
+		}
+	}
+
+	public function doLogout()
+	{
+		Auth::logout();
+		# Arahkan ke route 'index' dengan session 'pesan'.
+		return Redirect::to('/');
+	}
 }

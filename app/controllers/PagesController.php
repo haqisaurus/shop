@@ -20,10 +20,10 @@ class PagesController extends \BaseController {
 		return $this->layout;
 	}
 
-	public function product()
+	public function product($short = '')
 	{
 		$data = $this->commonData();
-		$data['new_products'] =  Product::orderBy('id', 'DESC')->paginate(1);
+		$data['new_products'] =  Product::orderBy('id', 'DESC')->paginate(9);
 
 		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.products')->with('data', $data);
 
@@ -93,6 +93,15 @@ class PagesController extends \BaseController {
 		return $this->layout;
 	}
 
+	public function forget()
+	{
+		$data = $this->commonData();
+
+		$this->layout->content = View::make('frontend.' . $this->theme . '.pages.forget')->with('data', $data);
+
+		return $this->layout;
+	}
+
 	public function register()
 	{
 		$data = $this->commonData();
@@ -118,8 +127,12 @@ class PagesController extends \BaseController {
 		$data['categories'] = Category::all();
 		$data['suppliers'] = Supplier::all();
 		$data['random_product'] = Product::where('stock', '>', 0)->where('price_promo', '>', 0)->orderByRaw("RAND()")->first();
-		$this->layout->cart = Session::get('cart_session');
+
+		$count = Order::where('user_address_id', Auth::id())->where('status', 0)->first() ? Order::where('user_address_id', Auth::id())->where('status', 0)->first()->detail->count() : 0;
+		$count = Auth::check() ? $count : count(Session::get('cart_session'));
+
+		$this->layout->cart = $count;
+		$this->layout->data = $data;
 		return $data;
 	}
-
 }

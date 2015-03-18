@@ -224,61 +224,7 @@ class UserController extends \BaseController {
 		}
 	}
 
-	public function showLogin()
-	{
-		
-		return View::make('frontend.pages.login');
-	}
 
-	public function doLogin()
-	{
-		// validate the info, create rules for the inputs
-		$rules = array(
-		    'email'    => 'required', // make sure the email is an actual email
-		    'password' => 'required|alphaNum|min:3' // password can only be alphanumeric and has to be greater than 3 characters
-		);
-
-		// run the validation rules on the inputs from the form
-		$validator = Validator::make(Input::all(), $rules);
-
-		// if the validator fails, redirect back to the form
-		if ($validator->fails()) {
-		    return Redirect::to('login')
-		        ->withErrors($validator) // send back all errors to the login form
-		        ->withInput(Input::except('password')); // send back the input (not the password) so that we can repopulate the form
-		} else {
-
-			// check is not admin
-
-		    $userdata = array(
-		    	// 'role_id' => 2,
-		        'email'     => Input::get('email'),
-		        'password'  => Input::get('password'),
-		    );
-
-		    if (Auth::attempt($userdata)) {
-
-		        return Redirect::to('dashboard');
-		    } else {        
-		    	return Redirect::to('login')
-		    			->with('msg', 'User not found...')
-            			->withInput(Input::except('password')); 	
-		    }
-
-		}
-	}
-
-	public function showAdminLogin()
-	{
-		return View::make('admin.layouts.login');
-	}
-
-	public function doLogout()
-	{
-		Auth::logout();
-		# Arahkan ke route 'index' dengan session 'pesan'.
-		return Redirect::to('login');
-	}
 
 	public function search()
 	{

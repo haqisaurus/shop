@@ -21,6 +21,7 @@ class UserTable extends Migration {
 			$table->string('password');
 			$table->string('photo');
 			$table->string('role_id');
+			$table->string('remember_token', 100)->nullable();
 			$table->timestamps();
 		});
 	}

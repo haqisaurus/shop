@@ -28,47 +28,26 @@
 			<div class="footer-bottom-cate">
 				<h6>CATEGORIES</h6>
 				<ul>
-					<li><a href="#">Curabitur sapien</a></li>
-					<li><a href="#">Dignissim purus</a></li>
-					<li><a href="#">Tempus pretium</a></li>
-					<li ><a href="#">Dignissim neque</a></li>
-					<li ><a href="#">Ornared id aliquet</a></li>
-					<li><a href="#">Ultrices id du</a></li>
-					<li><a href="#">Commodo sit</a></li>
-					<li ><a href="#">Urna ac tortor sc</a></li>
-					<li><a href="#">Ornared id aliquet</a></li>
-					<li><a href="#">Urna ac tortor sc</a></li>
-					<li ><a href="#">Eget nisi laoreet</a></li>
-					<li ><a href="#">Faciisis ornare</a></li>
+					@foreach($data['categories'] as $category)
+						<li>
+							<a href="{{ URL::to('product') }}">{{ $category->name }}</a>
+						</li>
+					@endforeach
 				</ul>
 			</div>
 			<div class="footer-bottom-cate bottom-grid-cat">
-				<h6>FEATURE PROJECTS</h6>
+				<h6>TOP BRANDS</h6>
 				<ul>
-					<li><a href="#">Curabitur sapien</a></li>
-					<li><a href="#">Dignissim purus</a></li>
-					<li><a href="#">Tempus pretium</a></li>
-					<li ><a href="#">Dignissim neque</a></li>
-					<li ><a href="#">Ornared id aliquet</a></li>
-					<li><a href="#">Ultrices id du</a></li>
-					<li><a href="#">Commodo sit</a></li>
+					@foreach($data['suppliers'] as $supplier)
+						<li>
+							<a href="{{ URL::to('product') }}">{{ $supplier->name }}</a>
+						</li>
+					@endforeach
 				</ul>
 			</div>
 			<div class="footer-bottom-cate">
-				<h6>TOP BRANDS</h6>
 				<ul>
-					<li><a href="#">Curabitur sapien</a></li>
-					<li><a href="#">Dignissim purus</a></li>
-					<li><a href="#">Tempus pretium</a></li>
-					<li ><a href="#">Dignissim neque</a></li>
-					<li ><a href="#">Ornared id aliquet</a></li>
-					<li><a href="#">Ultrices id du</a></li>
-					<li><a href="#">Commodo sit</a></li>
-					<li ><a href="#">Urna ac tortor sc</a></li>
-					<li><a href="#">Ornared id aliquet</a></li>
-					<li><a href="#">Urna ac tortor sc</a></li>
-					<li ><a href="#">Eget nisi laoreet</a></li>
-					<li ><a href="#">Faciisis ornare</a></li>
+					<li></li>
 				</ul>
 			</div>
 			<div class="footer-bottom-cate cate-bottom">

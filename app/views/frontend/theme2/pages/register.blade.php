@@ -32,11 +32,11 @@
 		</div>
 		<div class="clearfix"> </div>
 		<a class="news-letter" href="#">
-			<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Sign Up</label>
+			<label class="checkbox"><input type="checkbox" name="checkbox" checked=""><i> </i>Kirimkan berita produk</label>
 		</a>
 	</div>
 	<div class="  register-bottom-grid">
-		<h3>LOGIN INFORMATION</h3>
+		<h3>LOGIN PASSWORD</h3>
 		<div class="mation">
 			<span>Password<label>*</label></span>
             {{ Form::password('password', '', array('id' => 'password', 'class' => '', 'placeholder' => 'Password')) }}

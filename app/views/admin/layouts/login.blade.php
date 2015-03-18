@@ -37,18 +37,26 @@
                         <div class="row-fluid user-row">
                             {{ HTML::image('http://s11.postimg.org/7kzgji28v/logo_sm_2_mr_1.png', 'Conxole Admin', array('class' => 'img-responsive')) }}
                         </div>
-                    </div>
                     <div class="panel-body">
-                        {{ Form::open(array('action' => 'UserController@doLoginAdmin', 'class' => 'form-signin', 'accept-charset' => 'UTF-8', 'role' => 'form')) }}
+                        {{ Form::open(array('action' => 'ActionController@doLoginAdmin', 'class' => 'form-signin', 'accept-charset' => 'UTF-8', 'role' => 'form')) }}
                             <fieldset>
                                 <label class="panel-login">
                                     <div class="login_result"></div>
                                 </label>
 
                                 {{ Form::text('email', '',array('class' => 'form-control', 'placeholder' => 'Email', 'autofocus' => 'autofocus', 'required' => 'required' )) }}
+                                @if ($errors->has() && $errors->has('email'))
+                                    <p class="help-block error-block">{{ $errors->first('email') }}</p>
+                                @endif
 
                                 {{ Form::password('password', array('class' => 'form-control', 'placeholder' => 'Password', 'required' => 'required' )) }}
+                                @if ($errors->has() && $errors->has('password'))
+                                    <p class="help-block error-block">{{ $errors->first('password') }}</p>
+                                @endif
 
+                                @if (Session::has('msg'))
+                                    <p class="help-block error-block text-center error">{{ Session::get('msg') }}</p>
+                                @endif
                                 <br>
                                 {{  Form::submit('Login »', array('class' => 'btn btn-lg btn-primary btn-block', )) }}
                             </fieldset>

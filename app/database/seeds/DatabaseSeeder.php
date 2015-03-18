@@ -34,7 +34,7 @@ class UserTableSeeder extends Seeder {
 	        'lastname' => 'laravel',
 	        'photo' => 'laravel',
 	        'email'    => 'admin@laravel.com',
-	        'password' => Hash::make('laravel'),
+	        'password' => Hash::make('admin'),
 	        'role_id' => '1',
 	    ));
 
@@ -43,7 +43,7 @@ class UserTableSeeder extends Seeder {
 	        'lastname'     => 'laravel',
 	        'photo' => 'member',
 	        'email'    => 'member@laravel.com',
-	        'password' => Hash::make('laravel'),
+	        'password' => Hash::make('member'),
 	        'role_id' => '2',
 	    ));
 
@@ -52,7 +52,7 @@ class UserTableSeeder extends Seeder {
 	        'lastname'     => '2 laravel',
 	        'photo' => 'member 2',
 	        'email'    => 'member2@laravel.com',
-	        'password' => Hash::make('laravel'),
+	        'password' => Hash::make('member'),
 	        'role_id' => '2',
 	    ));
     }

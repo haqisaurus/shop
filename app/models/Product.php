@@ -29,6 +29,11 @@ class Product extends \Eloquent {
         return $this->hasMany('Comment', 'product_id');
     }
 
+    public function order()
+    {
+        return $this->hasMany('Order', 'product_id');
+    }
+
     public function delete()
     {
     	$result = File::deleteDirectory('uploads/product-media/' . $this->id);

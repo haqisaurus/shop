@@ -699,6 +699,10 @@ p.m_text {
 	overflow: hidden;
 	position: relative;
 	margin-bottom: 1em;
+	height: 22em;
+	/* display: table-cell; */
+	width: 100%;
+	vertical-align: middle;
 }
 .left-grid-view .mask,.left-grid-view .content {
 	position: absolute;
@@ -713,6 +717,7 @@ p.m_text {
 	-ms-transition: all 0.3s ease-in-out;
 	transition: all 0.3s ease-in-out;
 	margin: 0 auto;
+	width: auto;
 }
 .grid-view-left .mask {
 	-webkit-transform: translateX(-300px);
@@ -861,7 +866,7 @@ p.m_text {
 	display: block;
 	text-transform: uppercase;
 }
-.login-right input[type="text"] {
+.login-right input[type="text"], .login-right input[type="password"] {
 	border: 1px solid #DDDBDB;
 	outline-color:#fb4d01;
 	width: 96%;
@@ -981,7 +986,7 @@ a.forgot {
 .register-but{
 	margin-top:1em;
 }
-.register-but form input[type="submit"] {
+.register-but input[type="submit"] {
 	background:#F97E76;
 	color: #FFF;
 	font-size:1em;
